@@ -4,8 +4,11 @@ node('master') {
     }
     stage('build') {
         try {
+            dir('./Newsify.Web/')
+            {
                 bat 'nuget restore'
                 bat 'msbuild'
+            }
         }
         catch (exc) {
             slackSend 'build failed!'
@@ -32,7 +35,9 @@ node('master') {
     }
     stage('package') {
         try {
+            dir('./Newsify.Web/') {
             bat 'msbuild Newsify.Web /t:package'
+            }
         }
         catch (exc) {
             slackSend 'package failed!'
@@ -41,11 +46,11 @@ node('master') {
     }
     stage('deploy') {
         try {
-           // dir('./Newsify.Web/obj/Debug/Package')
-           // {
-            //        bat "\"C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe\" -source:package='C:\\Program Files (x86)\\Jenkins\\workspace\\Project 1 Pipeline\\RRRaves.Web\\obj\\Debug\\Package\\RRRaves.Web.zip' -dest:auto,computerName=\"https://ec2-35-173-247-221.compute-1.amazonaws.com:8172/msdeploy.axd\",userName=\"Administrator\",password=\"${env.Deploy_Password}\",authtype=\"basic\",includeAcls=\"False\" -verb:sync -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -setParamFile:\"C:\\Program Files (x86)\\Jenkins\\workspace\\Project 1 Pipeline\\RRRaves.Web\\obj\\Debug\\Package\\RRRaves.Web.SetParameters.xml\" -AllowUntrusted=True"
+           dir('./Newsify.Web/obj/Debug/Package')
+           {
+               bat "\"C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe\" -source:package='C:\\Program Files (x86)\\Jenkins\\workspace\\Project2-Newsify\\Newsify.Web\\Newsify.Web\\obj\\Debug\\Package\\Newsify.Web.zip' -dest:auto,computerName=\"http://ec2-18-205-102-39.compute-1.amazonaws.com:8172/msdeploy.axd\",userName=\"Administrator\",password=\"${env.Deploy_PW}\",authtype=\"basic\",includeAcls=\"False\" -verb:sync -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -setParamFile:\"C:\\Program Files (x86)\\Jenkins\\workspace\\Project2-Newsify\\Newsify.Web\\Newsify.Web\\obj\\Debug\\Package\\Newsify.Web.SetParameters.xml\" -AllowUntrusted=True"
                 
-            //}
+            }
         }
         catch (exc) {
             slackSend 'deploy failed!'
