@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="971342577f39481b8341c5effbad4dd0" Name="Diagram1">
+        <EntityTypeShape EntityType="NewsDBModel.Article" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.Comment" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.Post" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.Source" Width="1.5" PointX="1.5" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.User" Width="1.5" PointX="0.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.UserType" Width="1.5" PointX="1.5" PointY="19.375" IsExpanded="true" />
+        <AssociationConnector Association="NewsDBModel.FK__Articles__Source__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="NewsDBModel.FK__Posts__ArticleID__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="NewsDBModel.FK__Posts__CommentID__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="NewsDBModel.FK__Posts__ReplyTo__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="NewsDBModel.FK__Posts__UserID__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="NewsDBModel.FK__Users__Type__5165187F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
