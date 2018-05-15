@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Newsify.DAL
 {
-    public class Class1
+    interface IUnitOfWork : IDisposable
     {
+        int Complete();
     }
 }
