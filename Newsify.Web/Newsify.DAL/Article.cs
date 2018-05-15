@@ -30,8 +30,6 @@ namespace Newsify.DAL
         public System.DateTime PublishAt { get; set; }
         public string Category { get; set; }
         public string Topic { get; set; }
-        public string Country { get; set; }
-        public string Langauge { get; set; }
         public bool Active { get; set; }
     
         public virtual Source Source1 { get; set; }

@@ -13,10 +13,10 @@ namespace Newsify.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class NewsDBEntities : DbContext
+    public partial class NewsDBEntities1 : DbContext
     {
-        public NewsDBEntities()
-            : base("name=NewsDBEntities")
+        public NewsDBEntities1()
+            : base("name=NewsDBEntities1")
         {
         }
     

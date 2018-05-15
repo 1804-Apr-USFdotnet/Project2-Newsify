@@ -19,8 +19,6 @@
           <Property Name="PublishAt" Type="datetime" Nullable="false" />
           <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Topic" Type="varchar" MaxLength="50" />
-          <Property Name="Country" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Langauge" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Comments">
@@ -50,6 +48,11 @@
           <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id" Type="varchar" MaxLength="50" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Url" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Langauge" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -194,8 +197,6 @@
           <Property Name="PublishAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Topic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Langauge" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Source1" Relationship="Self.FK__Articles__Source__4BAC3F29" FromRole="Articles" ToRole="Sources" />
           <NavigationProperty Name="Posts" Relationship="Self.FK__Posts__ArticleID__5629CD9C" FromRole="Articles" ToRole="Posts" />
@@ -233,6 +234,11 @@
           <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Langauge" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Articles" Relationship="Self.FK__Articles__Source__4BAC3F29" FromRole="Sources" ToRole="Articles" />
         </EntityType>
         <EntityType Name="User">
@@ -330,7 +336,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="NewsDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="NewsDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Articles" EntityType="Self.Article" />
           <EntitySet Name="Comments" EntityType="Self.Comment" />
           <EntitySet Name="Posts" EntityType="Self.Post" />
@@ -367,7 +373,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="NewsDBModelStoreContainer" CdmEntityContainer="NewsDBEntities">
+        <EntityContainerMapping StorageEntityContainer="NewsDBModelStoreContainer" CdmEntityContainer="NewsDBEntities1">
           <EntitySetMapping Name="Articles">
             <EntityTypeMapping TypeName="NewsDBModel.Article">
               <MappingFragment StoreEntitySet="Articles">
@@ -381,8 +387,6 @@
                 <ScalarProperty Name="PublishAt" ColumnName="PublishAt" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="Topic" ColumnName="Topic" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Langauge" ColumnName="Langauge" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -415,6 +419,11 @@
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Langauge" ColumnName="Langauge" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
