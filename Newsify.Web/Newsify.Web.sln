@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newsify.Web", "Newsify.Web\Newsify.Web.csproj", "{A801CE6E-F2B2-406E-B714-E98F1B81932E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newsify.DAL", "Newsify.DAL\Newsify.DAL.csproj", "{51F608DF-33DC-467C-8FE0-F05807EB2A73}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newsify.Logic", "Newsify.Logic\Newsify.Logic.csproj", "{2EDC828F-1956-4AB0-82E1-130040C13C52}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newsify.DAL.Tests", "Newsify.DAL.Tests\Newsify.DAL.Tests.csproj", "{E5814917-22D5-4456-BC93-5EAC704E747C}"
@@ -14,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newsify.Logic.Tests", "Newsify.Logic.Tests\Newsify.Logic.Tests.csproj", "{38BA757C-22C9-471B-859B-254A89BC64FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newsify.Web.Tests", "Newsify.Web.Tests\Newsify.Web.Tests.csproj", "{836D1758-0040-4430-9BE9-72B5565EB612}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newsify.DAL", "Newsify.DAL\Newsify.DAL.csproj", "{8EA7CEA1-0BBC-4010-A497-09CBDBDA901E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,6 @@ Global
 		{A801CE6E-F2B2-406E-B714-E98F1B81932E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A801CE6E-F2B2-406E-B714-E98F1B81932E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A801CE6E-F2B2-406E-B714-E98F1B81932E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51F608DF-33DC-467C-8FE0-F05807EB2A73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51F608DF-33DC-467C-8FE0-F05807EB2A73}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51F608DF-33DC-467C-8FE0-F05807EB2A73}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51F608DF-33DC-467C-8FE0-F05807EB2A73}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2EDC828F-1956-4AB0-82E1-130040C13C52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2EDC828F-1956-4AB0-82E1-130040C13C52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EDC828F-1956-4AB0-82E1-130040C13C52}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{836D1758-0040-4430-9BE9-72B5565EB612}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{836D1758-0040-4430-9BE9-72B5565EB612}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{836D1758-0040-4430-9BE9-72B5565EB612}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EA7CEA1-0BBC-4010-A497-09CBDBDA901E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA7CEA1-0BBC-4010-A497-09CBDBDA901E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA7CEA1-0BBC-4010-A497-09CBDBDA901E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA7CEA1-0BBC-4010-A497-09CBDBDA901E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
