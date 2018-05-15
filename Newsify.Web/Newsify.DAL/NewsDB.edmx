@@ -12,8 +12,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Source" Type="int" />
           <Property Name="Author" Type="varchar" MaxLength="50" />
-          <Property Name="Title" Type="nvarchar" MaxLength="1" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Url" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="UrlToImage" Type="varchar" MaxLength="200" />
           <Property Name="PublishAt" Type="datetime" Nullable="false" />
@@ -189,8 +189,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Source" Type="Int32" />
           <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Title" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UrlToImage" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PublishAt" Type="DateTime" Nullable="false" Precision="3" />
