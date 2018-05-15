@@ -26,7 +26,7 @@ namespace Newsify.DAL
         public string Description { get; set; }
         public string Url { get; set; }
         public string Category { get; set; }
-        public string Langauge { get; set; }
+        public string Language { get; set; }
         public string Country { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
