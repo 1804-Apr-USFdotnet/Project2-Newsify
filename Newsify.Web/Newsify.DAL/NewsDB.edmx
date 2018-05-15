@@ -15,7 +15,7 @@
           <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Url" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="UrlToImage" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="UrlToImage" Type="varchar" MaxLength="200" />
           <Property Name="PublishAt" Type="datetime" Nullable="false" />
           <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Topic" Type="varchar" MaxLength="50" />
@@ -192,7 +192,7 @@
           <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="UrlToImage" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UrlToImage" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PublishAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Topic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
