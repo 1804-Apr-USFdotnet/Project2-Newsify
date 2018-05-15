@@ -13,7 +13,12 @@ create table News.Sources
 (
 	[PK] int primary key identity(1,1),
 	[Id] varchar(50) null, -- Source's ID; can be null
-	[Name] varchar(50) not null -- Name of the source; can't be null
+	[Name] varchar(50) not null, -- Name of the source; can't be null
+	[Description] varchar(200) not null, -- Description of the source
+	[Url] varchar(200) not null, -- Link to the main page of the source
+	[Category] varchar(50) not null, -- Type of articles the sources has
+	[Langauge] varchar(5) not null, -- The langauge the articles are in
+	[Country] varchar(5) not null -- Country the source is from
 );
 Go;
 
@@ -30,8 +35,8 @@ create table News.Articles
 	[PublishAt] datetime not null, -- The time the article was published; can't be null
 	[Category] varchar(50) not null, -- The category the article falls under; can't be null
 	[Topic] varchar(50) null, -- Keyword for the article; can be null
-	[Country] varchar(100) not null, -- Country of origin of the article; can't be null
-	[Langauge] varchar(5) not null, -- should be only two characters to indicate the langauage
+	--[Country] varchar(100) not null, -- Country of origin of the article; can't be null
+	--[Langauge] varchar(5) not null, -- should be only two characters to indicate the langauage
 	[Active] bit not null -- Indicates if the article is active;
 );
 Go;
