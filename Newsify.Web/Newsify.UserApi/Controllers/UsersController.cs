@@ -20,7 +20,7 @@ namespace Newsify.UserApi.Controllers
         }
 
         // GET: 
-        public HttpResponseMessage Get([FromBody] Models.User user)
+        public IHttpActionResult Get([FromBody] Models.User user)
         {
             try
             {
@@ -29,15 +29,16 @@ namespace Newsify.UserApi.Controllers
                     var u = db.Users.Where(x => x.UserName == user.UserName && x.Password == user.Password && x.Active).FirstOrDefault();
                     if (u != null)
                     {
-                        return null;
+                        return NotFound(); // Can't login if the user information doesn't match
                     }
+                    return Ok(); // Log the user in
                 }
             }
             catch (Exception ex)
             {
                 // Log the Exception error message
             }
-            return null; // User isn't in the database
+            return BadRequest("Something went wrong."); // User isn't in the database
         }
 
         // POST: Process a new user registration
@@ -73,8 +74,9 @@ namespace Newsify.UserApi.Controllers
             catch (Exception ex)
             {
                 // Log the Exception error message
+                return BadRequest("Something went wrong while processing the new user registration request.");
             }
-            return null; // User isn't in the database
+            return Ok(); // Added the user to the database without errors
         }
 
         // PUT: The user is only able to update their password, first and last name, and birthday.
@@ -93,6 +95,7 @@ namespace Newsify.UserApi.Controllers
                     user.BirthDate = profile.Birthdate;
 
                     db.SaveChanges(); // Saves the changes to the database
+                    return Ok(); // Finished processing the request
                 }
                 else
                 {
