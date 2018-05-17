@@ -20,7 +20,7 @@ namespace Newsify.UserApi.Controllers
         }
 
         // GET: 
-        public IHttpActionResult Get([FromBody] Models.User user)
+        public IHttpActionResult Get(Models.User user)
         {
             try
             {
