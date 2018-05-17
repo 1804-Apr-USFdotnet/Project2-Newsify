@@ -53,6 +53,7 @@
     <Compile Include="Article.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="CommentRepo.cs" />
     <Compile Include="IArticleRepo.cs" />
     <Compile Include="ICommentRepo.cs" />
     <Compile Include="IPostRepo.cs" />
@@ -88,12 +89,16 @@
     <Compile Include="Source.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="SourceRepo.cs" />
+    <Compile Include="UnitOfWork.cs" />
     <Compile Include="User.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserRepo.cs" />
     <Compile Include="UserType.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserTypeRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -8,6 +8,14 @@ namespace Newsify.DAL
 {
     interface IUnitOfWork : IDisposable
     {
+        IArticleRepo ArticleR { get; }
+        IPostRepo PostR { get; }
+        ICommentRepo CommentR { get; }
+        ISourceRepo SourceR { get; }
+        IUserRepo UserR { get; }
+        IUserTypeRepo UserTypeR { get; }
+
+
         int Complete();
     }
 }
