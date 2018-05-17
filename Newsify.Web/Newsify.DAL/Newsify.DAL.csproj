@@ -52,11 +52,17 @@
     <Compile Include="Article.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="IArticleRepo.cs" />
+    <Compile Include="ICommentRepo.cs" />
+    <Compile Include="IPostRepo.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Comment.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ISourceRepo.cs" />
     <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="IUserRepo.cs" />
+    <Compile Include="IUserTypeRepo.cs" />
     <Compile Include="NewsDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
