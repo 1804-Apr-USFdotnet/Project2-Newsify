@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleRepo.cs" />
     <Compile Include="Article.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
@@ -81,7 +82,9 @@
     <Compile Include="Post.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="PostRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="Source.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
