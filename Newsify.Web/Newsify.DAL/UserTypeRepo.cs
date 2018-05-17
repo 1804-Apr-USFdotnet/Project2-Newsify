@@ -13,6 +13,11 @@ namespace Newsify.DAL
 
         }
 
+        public override UserType Delete(UserType entity)
+        {
+            return base.Delete(entity);
+        }
+
         public override bool Validation(UserType entity)
         {
             //TODO: Validation of properties.

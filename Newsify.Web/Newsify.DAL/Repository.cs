@@ -29,7 +29,7 @@ namespace Newsify.DAL
             }
         }
 
-        public TEntity Delete(TEntity entity)
+        public virtual TEntity Delete(TEntity entity)
         {
             DB.Set<TEntity>().Remove(entity);
             return entity;
@@ -73,7 +73,7 @@ namespace Newsify.DAL
 
         public virtual bool Validation(TEntity entity)
         {
-            return false;
+            return true;
         }
     }
 }

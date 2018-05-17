@@ -13,11 +13,30 @@ namespace Newsify.DAL
 
         }
 
+        public override User Delete(User entity)
+        {
+            entity.Active = false;
+            var EntityToDelete = DB.Set<User>().Find(entity.ID);
+            if (EntityToDelete != null && EntityToDelete.Active)
+            {
+                DB.Entry(EntityToDelete).CurrentValues.SetValues(entity);
+                return entity;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public override bool Validation(User entity)
         {
-            //TODO: Validation of properties.
-
-            return true;
+            if (entity.UserName.Length <= 30 && DB.Set<User>().Where(x => x.UserName == entity.UserName) == null)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
         }
     }
 }

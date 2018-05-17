@@ -13,6 +13,11 @@ namespace Newsify.DAL
 
         }
 
+        public override Source Delete(Source entity)
+        {
+            return base.Delete(entity);
+        }
+
         public override bool Validation(Source entity)
         {
             //TODO: Validation of properties.

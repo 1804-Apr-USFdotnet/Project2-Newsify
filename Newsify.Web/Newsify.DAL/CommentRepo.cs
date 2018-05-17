@@ -13,6 +13,21 @@ namespace Newsify.DAL
 
         }
 
+        public override Comment Delete(Comment entity)
+        {
+            entity.Active = false;
+            var EntityToDelete = DB.Set<Comment>().Find(entity.ID);
+            if (EntityToDelete != null && EntityToDelete.Active)
+            {
+                DB.Entry(EntityToDelete).CurrentValues.SetValues(entity);
+                return entity;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public override bool Validation(Comment entity)
         {
             //TODO: Validation of properties.
