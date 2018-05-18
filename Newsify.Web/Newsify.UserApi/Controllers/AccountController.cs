@@ -14,7 +14,7 @@ namespace Newsify.UserApi.Controllers
 {
     public class AccountController : ApiController
     {
-        private static NewsDBEntities db = new NewsDBEntities();
+        /*private static NewsDBEntities db = new NewsDBEntities();
 
         #region Http Verbs
         // GET: Can't just make an empty get call
@@ -141,6 +141,7 @@ namespace Newsify.UserApi.Controllers
         }
         #endregion
 
+        */
         #region Authentication
 
         [HttpPost]
