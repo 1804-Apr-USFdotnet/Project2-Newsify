@@ -9,13 +9,14 @@
 
 namespace Newsify.DAL
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class User :IdentityUser
     {
-        public string Id { get; set; }
-        public string UserName { get; set; }
+        public override string Id { get; set; }
+        public override string UserName { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
