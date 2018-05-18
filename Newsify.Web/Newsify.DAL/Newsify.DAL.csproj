@@ -95,7 +95,6 @@
     <Compile Include="Repositoy\SourceRepo.cs" />
     <Compile Include="Repositoy\UnitOfWork.cs" />
     <Compile Include="Repositoy\UserRepo.cs" />
-    <Compile Include="Repositoy\UserTypeRepo.cs" />
     <Compile Include="Source.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
