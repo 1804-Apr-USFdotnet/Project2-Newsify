@@ -4,23 +4,34 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Newsify.UserApi.Models
 {
+    // DBContext
+    public class UserDBContext : IdentityDbContext<Users>
+    {
+        public UserDBContext() : base("NewsDBEntities")
+        {
+        }
+    }
+
+    // This model is used to login
+    public class User
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+    }
+
     // This model will contain the new user's information needed to create a new user
-    public class RegistrationBindingModel
+    public class Users : IdentityUser
     {
         [Required]
-        public string UserName { get; set; }
+        public override string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Compare("Password")]
-        public string ConfirmPassword { get; set; }
 
         [Required]
         public string FirstName { get; set; }
@@ -34,7 +45,7 @@ namespace Newsify.UserApi.Models
     }
 
     // This model will be used to change the user's password
-    public class ChangePasswordBindingModel
+    public class ChangePassword
     {
         [Required]
         public string UserName { get; set; }
@@ -54,7 +65,7 @@ namespace Newsify.UserApi.Models
     }
 
     // This model will be used to update user's information
-    public class UpdateUserProfileBindingModel
+    public class UpdateUserProfile
     {
         [Required]
         public string UserName { get; set; }
