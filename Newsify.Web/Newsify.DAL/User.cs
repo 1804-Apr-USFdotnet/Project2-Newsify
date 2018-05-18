@@ -20,17 +20,15 @@ namespace Newsify.DAL
             this.Posts = new HashSet<Post>();
         }
     
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public System.DateTime BirthDate { get; set; }
-        public int Type { get; set; }
         public bool Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Post> Posts { get; set; }
-        public virtual UserType UserType { get; set; }
     }
 }

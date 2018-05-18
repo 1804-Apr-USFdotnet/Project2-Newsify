@@ -36,6 +36,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -49,22 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArticleRepo.cs" />
     <Compile Include="Article.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="CommentRepo.cs" />
-    <Compile Include="IArticleRepo.cs" />
-    <Compile Include="ICommentRepo.cs" />
-    <Compile Include="IPostRepo.cs" />
-    <Compile Include="IRepository.cs" />
     <Compile Include="Comment.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="ISourceRepo.cs" />
-    <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="IUserRepo.cs" />
-    <Compile Include="IUserTypeRepo.cs" />
     <Compile Include="NewsDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,22 +79,32 @@
     <Compile Include="Post.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="PostRepo.cs" />
+    <Compile Include="Repositoy\ArticleRepo.cs" />
+    <Compile Include="Repositoy\CommentRepo.cs" />
+    <Compile Include="Repositoy\IArticleRepo.cs" />
+    <Compile Include="Repositoy\ICommentRepo.cs" />
+    <Compile Include="Repositoy\IPostRepo.cs" />
+    <Compile Include="Repositoy\IRepository.cs" />
+    <Compile Include="Repositoy\ISourceRepo.cs" />
+    <Compile Include="Repositoy\IUnitOfWork.cs" />
+    <Compile Include="Repositoy\IUserRepo.cs" />
+    <Compile Include="Repositoy\IUserTypeRepo.cs" />
+    <Compile Include="Repositoy\PostRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
+    <Compile Include="Repositoy\Repository.cs" />
+    <Compile Include="Repositoy\SourceRepo.cs" />
+    <Compile Include="Repositoy\UnitOfWork.cs" />
+    <Compile Include="Repositoy\UserRepo.cs" />
+    <Compile Include="Repositoy\UserTypeRepo.cs" />
     <Compile Include="Source.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="SourceRepo.cs" />
-    <Compile Include="UnitOfWork.cs" />
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>NewsDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserRepo.cs" />
-    <Compile Include="UserType.cs">
-      <DependentUpon>NewsDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserTypeRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -112,6 +118,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="NewsDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>NewsDB.edmx</DependentUpon>
@@ -122,9 +131,6 @@
       <DependentUpon>NewsDB.edmx</DependentUpon>
       <LastGenOutput>NewsDB.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
