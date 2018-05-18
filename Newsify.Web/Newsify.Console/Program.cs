@@ -17,6 +17,7 @@ namespace Newsify.Console
     {
         static void Main(string[] args)
         {
+            //test Webhook
             NewsDBEntities newsDB = new NewsDBEntities();
             string apiKey = "33b909af4e294034ad07bd3546790502"; // My NewsAPI key
             //var url3 = "https://newsapi.org/v2/sources?&apiKey=33b909af4e294034ad07bd3546790502";

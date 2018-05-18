@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="710725adcaef4b8bbf6777058958763d" Name="Diagram1">
-        <EntityTypeShape EntityType="NewsDBModel.Article" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NewsDBModel.Comment" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="NewsDBModel.Post" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="NewsDBModel.Source" Width="1.5" PointX="1.5" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="NewsDBModel.User" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="NewsDBModel.UserType" Width="1.5" PointX="1.5" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.Article" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.Comment" Width="1.5" PointX="2.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.Post" Width="1.5" PointX="4.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.Source" Width="1.5" PointX="0.625" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.User" Width="1.5" PointX="5.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.UserType" Width="1.5" PointX="4.125" PointY="9.25" IsExpanded="true" />
         <AssociationConnector Association="NewsDBModel.FK__Articles__Source__4BAC3F29" ManuallyRouted="false" />
         <AssociationConnector Association="NewsDBModel.FK__Posts__ArticleID__5629CD9C" ManuallyRouted="false" />
         <AssociationConnector Association="NewsDBModel.FK__Posts__CommentID__571DF1D5" ManuallyRouted="false" />
