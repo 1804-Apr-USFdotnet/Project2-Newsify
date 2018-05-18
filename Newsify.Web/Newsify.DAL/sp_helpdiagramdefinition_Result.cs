@@ -10,16 +10,10 @@
 namespace Newsify.DAL
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class User
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public string Id { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public System.DateTime BirthDate { get; set; }
-        public bool Active { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -10,18 +10,13 @@
 namespace Newsify.DAL
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Post
+    public partial class sp_helpdiagrams_Result
     {
+        public string Database { get; set; }
+        public string Name { get; set; }
         public int ID { get; set; }
-        public int ArticleID { get; set; }
-        public int CommentID { get; set; }
-        public string UserID { get; set; }
-        public Nullable<int> ReplyTo { get; set; }
-    
-        public virtual Article Article { get; set; }
-        public virtual Comment Comment { get; set; }
-        public virtual Comment Comment1 { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }
