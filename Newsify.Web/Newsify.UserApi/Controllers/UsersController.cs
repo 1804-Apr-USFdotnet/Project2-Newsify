@@ -42,7 +42,7 @@ namespace Newsify.UserApi.Controllers
         }
 
         // POST: Process a new user registration
-        public IHttpActionResult Post([FromBody] Models.Registration newUser)
+        public IHttpActionResult Post([FromBody] Models.RegistrationBindingModel newUser)
         {
             try
             {
@@ -80,26 +80,27 @@ namespace Newsify.UserApi.Controllers
         }
 
         // PUT: The user is only able to update their password, first and last name, and birthday.
-        public IHttpActionResult Put([FromBody] Models.Registration profile)
+        public IHttpActionResult Put([FromBody] Models.ChangePasswordBindingModel profile)
         {
             try
             {
-                // Make sure the user is in the database
-                var user = db.Users.Where(x => x.UserName == profile.UserName).FirstOrDefault();
-                if (user != null)
+                if (ModelState.IsValid)
                 {
-                    // Update the User's information
-                    user.Password = profile.Password;
-                    user.FirstName = profile.FirstName;
-                    user.LastName = profile.LastName;
-                    user.BirthDate = profile.Birthdate;
+                    // Make sure the user is in the database
+                    var user = db.Users.Where(x => x.UserName == profile.UserName).FirstOrDefault();
 
-                    db.SaveChanges(); // Saves the changes to the database
-                    return Ok(); // Finished processing the request
-                }
-                else
-                {
-                    return NotFound(); // User wasn't found in the database
+                    if (user != null)
+                    {
+                        // Update the User's password
+                        user.Password = profile.NewPassword;
+
+                        db.SaveChanges(); // Saves the changes to the database
+                        return Ok(); // Finished processing the request
+                    }
+                    else
+                    {
+                        return NotFound(); // User wasn't found in the database
+                    }
                 }
             }
             catch (Exception ex)
