@@ -1,0 +1,435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NewsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Articles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Source" Type="int" />
+          <Property Name="Author" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UrlToImage" Type="nvarchar(max)" />
+          <Property Name="PublishAt" Type="datetime" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Topic" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommentedAt" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArticleID" Type="int" Nullable="false" />
+          <Property Name="CommentID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReplyTo" Type="int" />
+        </EntityType>
+        <EntityType Name="Sources">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NewsDB.News.Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="BirthDate" />
+            <PropertyRef Name="Active" />
+          </Key>
+          <Property Name="Id" Type="nvarchar(max)" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Articles__Source__4BAC3F29">
+          <End Role="Sources" Type="Self.Sources" Multiplicity="0..1" />
+          <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sources">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="Source" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts__ArticleID__5629CD9C">
+          <End Role="Articles" Type="Self.Articles" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="ArticleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts__CommentID__571DF1D5">
+          <End Role="Comments" Type="Self.Comments" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts__ReplyTo__59063A47">
+          <End Role="Comments" Type="Self.Comments" Multiplicity="0..1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="ReplyTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NewsDBModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Articles" EntityType="Self.Articles" Schema="News" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="News" store:Type="Tables" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="News" store:Type="Tables" />
+          <EntitySet Name="Sources" EntityType="Self.Sources" Schema="News" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" store:Type="Tables" store:Schema="News">
+            <DefiningQuery>SELECT 
+    [Users].[Id] AS [Id], 
+    [Users].[UserName] AS [UserName], 
+    [Users].[Password] AS [Password], 
+    [Users].[FirstName] AS [FirstName], 
+    [Users].[LastName] AS [LastName], 
+    [Users].[BirthDate] AS [BirthDate], 
+    [Users].[Active] AS [Active]
+    FROM [News].[Users] AS [Users]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Articles__Source__4BAC3F29" Association="Self.FK__Articles__Source__4BAC3F29">
+            <End Role="Sources" EntitySet="Sources" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts__ArticleID__5629CD9C" Association="Self.FK__Posts__ArticleID__5629CD9C">
+            <End Role="Articles" EntitySet="Articles" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts__CommentID__571DF1D5" Association="Self.FK__Posts__CommentID__571DF1D5">
+            <End Role="Comments" EntitySet="Comments" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts__ReplyTo__59063A47" Association="Self.FK__Posts__ReplyTo__59063A47">
+            <End Role="Comments" EntitySet="Comments" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NewsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Source" Type="Int32" />
+          <Property Name="Author" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UrlToImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PublishAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Topic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Source1" Relationship="Self.FK__Articles__Source__4BAC3F29" FromRole="Articles" ToRole="Sources" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK__Posts__ArticleID__5629CD9C" FromRole="Articles" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommentedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK__Posts__CommentID__571DF1D5" FromRole="Comments" ToRole="Posts" />
+          <NavigationProperty Name="Posts1" Relationship="Self.FK__Posts__ReplyTo__59063A47" FromRole="Comments" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArticleID" Type="Int32" Nullable="false" />
+          <Property Name="CommentID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReplyTo" Type="Int32" />
+          <NavigationProperty Name="Article" Relationship="Self.FK__Posts__ArticleID__5629CD9C" FromRole="Posts" ToRole="Articles" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK__Posts__CommentID__571DF1D5" FromRole="Posts" ToRole="Comments" />
+          <NavigationProperty Name="Comment1" Relationship="Self.FK__Posts__ReplyTo__59063A47" FromRole="Posts" ToRole="Comments" />
+        </EntityType>
+        <EntityType Name="Source">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Language" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Articles" Relationship="Self.FK__Articles__Source__4BAC3F29" FromRole="Sources" ToRole="Articles" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="BirthDate" />
+            <PropertyRef Name="Active" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Articles__Source__4BAC3F29">
+          <End Role="Sources" Type="Self.Source" Multiplicity="0..1" />
+          <End Role="Articles" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sources">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="Source" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts__ArticleID__5629CD9C">
+          <End Role="Articles" Type="Self.Article" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="ArticleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts__CommentID__571DF1D5">
+          <End Role="Comments" Type="Self.Comment" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts__ReplyTo__59063A47">
+          <End Role="Comments" Type="Self.Comment" Multiplicity="0..1" />
+          <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="ReplyTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NewsDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Articles" EntityType="Self.Article" />
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="Posts" EntityType="Self.Post" />
+          <EntitySet Name="Sources" EntityType="Self.Source" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Articles__Source__4BAC3F29" Association="Self.FK__Articles__Source__4BAC3F29">
+            <End Role="Sources" EntitySet="Sources" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts__ArticleID__5629CD9C" Association="Self.FK__Posts__ArticleID__5629CD9C">
+            <End Role="Articles" EntitySet="Articles" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts__CommentID__571DF1D5" Association="Self.FK__Posts__CommentID__571DF1D5">
+            <End Role="Comments" EntitySet="Comments" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts__ReplyTo__59063A47" Association="Self.FK__Posts__ReplyTo__59063A47">
+            <End Role="Comments" EntitySet="Comments" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NewsDBModelStoreContainer" CdmEntityContainer="NewsDBEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="NewsDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="NewsDBModel.Article">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="UrlToImage" ColumnName="UrlToImage" />
+                <ScalarProperty Name="PublishAt" ColumnName="PublishAt" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="NewsDBModel.Comment">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CommentedAt" ColumnName="CommentedAt" />
+                <ScalarProperty Name="Comment1" ColumnName="Comment" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="NewsDBModel.Post">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ReplyTo" ColumnName="ReplyTo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sources">
+            <EntityTypeMapping TypeName="NewsDBModel.Source">
+              <MappingFragment StoreEntitySet="Sources">
+                <ScalarProperty Name="PK" ColumnName="PK" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="NewsDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
