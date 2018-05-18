@@ -11,7 +11,7 @@ namespace Newsify.UserApi.Models
     // DBContext
     public class UserDBContext : IdentityDbContext<Users>
     {
-        public UserDBContext() : base("NewsDBEntities")
+        public UserDBContext() : base("UserDB")
         {
         }
     }
