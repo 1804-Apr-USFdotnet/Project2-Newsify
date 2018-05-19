@@ -48,9 +48,6 @@ namespace Newsify.UserApi.Models
     public class ChangePassword
     {
         [Required]
-        public string UserName { get; set; }
-
-        [Required]
         [DataType(DataType.Password)]
         public string OldPassword { get; set; }
 
@@ -60,16 +57,13 @@ namespace Newsify.UserApi.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Compare("NewPassowrd")]
+        [Compare("NewPassword")]
         public string ConfirmPassword { get; set; }
     }
 
     // This model will be used to update user's information
     public class UpdateUserProfile
     {
-        [Required]
-        public string UserName { get; set; }
-
         [Required]
         public string FirstName { get; set; }
 
