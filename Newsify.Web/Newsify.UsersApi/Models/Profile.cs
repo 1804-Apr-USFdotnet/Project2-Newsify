@@ -9,7 +9,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace Newsify.UserApi.Models
 {
     // DBContext
-    public class UserDBContext : IdentityDbContext<Users>
+    public class UserDBContext : IdentityDbContext<IdentityUser>
     {
         public UserDBContext() : base("UserDB")
         {
@@ -24,25 +24,25 @@ namespace Newsify.UserApi.Models
     }
 
     // This model will contain the new user's information needed to create a new user
-    public class Users : IdentityUser
-    {
-        [Required]
-        public override string UserName { get; set; }
+    //public class Users : IdentityUser
+    //{
+    //    [Required]
+    //    public override string UserName { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
+    //    [Required]
+    //    [DataType(DataType.Password)]
+    //    public string Password { get; set; }
 
-        [Required]
-        public string FirstName { get; set; }
+    //    [Required]
+    //    public string FirstName { get; set; }
 
-        [Required]
-        public string LastName { get; set; }
+    //    [Required]
+    //    public string LastName { get; set; }
 
-        [Required]
-        [DataType(DataType.DateTime)]
-        public DateTime Birthdate { get; set; }
-    }
+    //    [Required]
+    //    [DataType(DataType.DateTime)]
+    //    public DateTime Birthdate { get; set; }
+    //}
 
     // This model will be used to change the user's password
     public class ChangePassword
