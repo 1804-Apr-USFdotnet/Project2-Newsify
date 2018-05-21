@@ -13,37 +13,18 @@ namespace Newsify.DAL.Tests
 {
     public class RepositoryTests
     {
-        class DbMockHelper<T> where T : class
-        {
-            public Mock<DbContext> DbMock { get; private set; }
-
-            public DbMockHelper()
-            {
-                DbMock = new Mock<DbContext>();
-                T temp = It.IsAny<T>();
-                DbMock.Setup(x => x.Set<T>().Add(temp)).Returns(temp);
-
-                T temp1 = It.IsAny<T>();
-                DbMock.Setup(x => x.Set<T>().Remove(temp1)).Returns(temp1);
-
-                IEnumerable<T> tempList = It.IsAny<IEnumerable<T>>();
-                DbMock.Setup(x => x.Set<T>().RemoveRange(tempList)).Returns(tempList);
-
-                T temp2 = It.IsAny<T>();
-                DbMock.Setup(x => x.Set<T>().Find(It.IsAny<int>())).Returns(temp);
-
-                List<T> tempList2 = It.IsAny<List<T>>();
-                DbMock.Setup(x => x.Set<T>().ToList<T>()).Returns(tempList2);
-            }
-        }
-
+        
         [Fact]
         public void CreateArticle_CreateAnArticle_ReturnArticle()
         {
-            var dbm = new DbMockHelper<Article>();
+
+            var DbMock = new Mock<DbContext>();
+            var entity = new Article();
+            DbMock.Setup(x => x.Set<Article>().Add(entity)).Returns(entity);
+            
             
 
-            Repository<Article> repository = new Repository<Article>(dbm.DbMock.Object);
+            Repository<Article> repository = new Repository<Article>(DbMock.Object);
             var expected = new Article();
             var temp = repository.Create(expected);
 
