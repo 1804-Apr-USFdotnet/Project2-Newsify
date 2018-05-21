@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Newsify.DAL
 {
-    public interface IUserRepo
+    public interface IUserRepo : IRepository<User>
     {
     }
 }

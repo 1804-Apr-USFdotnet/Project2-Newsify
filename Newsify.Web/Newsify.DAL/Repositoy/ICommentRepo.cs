@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Newsify.DAL
 {
-    public interface ICommentRepo
+    public interface ICommentRepo : IRepository<Comment>
     {
     }
 }

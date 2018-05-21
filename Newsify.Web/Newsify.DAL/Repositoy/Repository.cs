@@ -49,7 +49,7 @@ namespace Newsify.DAL
 
         public IEnumerable<TEntity> GetAll()
         {
-            return DB.Set<TEntity>();
+            return DB.Set<TEntity>().ToList<TEntity>();
         }
 
         public IEnumerable<TEntity> SearchFor(Expression<Func<TEntity, bool>> predicate)

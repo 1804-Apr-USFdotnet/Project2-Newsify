@@ -22,17 +22,15 @@ namespace Newsify.DAL
             //UserTypeR = new UserTypeRepo(newsDB);
         }
 
-        public IArticleRepo ArticleR { get; private set; }
+        public ArticleRepo ArticleR { get; private set; }
 
-        public IPostRepo PostR { get; private set; }
+        public PostRepo PostR { get; private set; }
 
-        public ICommentRepo CommentR { get; private set; }
+        public CommentRepo CommentR { get; private set; }
 
-        public ISourceRepo SourceR { get; private set; }
+        public SourceRepo SourceR { get; private set; }
 
-        public IUserRepo UserR { get; private set; }
-
-        public IUserTypeRepo UserTypeR { get; private set; }
+        public UserRepo UserR { get; private set; }
 
         public int Complete()
         {
