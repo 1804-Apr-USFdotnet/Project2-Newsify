@@ -19,9 +19,10 @@ namespace Newsify.DataApi.Controllers
         {
             try
             {
-                using (var uow = new UnitofWork(new NewsDBEntities()))
+                using (var uow = new UnitOfWork(new NewsDBEntities()))
                 {
-
+                    uow.CommentR.Add(comment);
+                    uow.Complete();
                 }
             }
             catch (Exception ex)
