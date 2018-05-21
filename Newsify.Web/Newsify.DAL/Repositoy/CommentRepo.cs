@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Newsify.DAL
 {
-    class CommentRepo : Repository<Comment>, ICommentRepo
+    public class CommentRepo : Repository<Comment>, ICommentRepo
     {
         public CommentRepo(NewsDBEntities context) : base(context)
         {
