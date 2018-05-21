@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Newsify.DAL
 {
-    class UserRepo : Repository<User>, IUserRepo
+    public class UserRepo : Repository<User>, IUserRepo
     {
         public UserRepo(NewsDBEntities context) : base(context)
         {

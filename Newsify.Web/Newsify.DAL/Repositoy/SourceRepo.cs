@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Newsify.DAL
 {
-    class SourceRepo : Repository<Source>, ISourceRepo
+    public class SourceRepo : Repository<Source>, ISourceRepo
     {
         public SourceRepo(NewsDBEntities context) : base(context)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Newsify.DAL
 {
-    interface IArticleRepo
+    public interface IArticleRepo
     {
     }
 }

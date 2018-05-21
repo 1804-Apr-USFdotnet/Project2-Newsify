@@ -13,6 +13,18 @@ namespace Newsify.DAL.Tests
 {
     public class RepositoryTests
     {
+        class DbMockHelper<T> where T : class
+        {
+            public Mock<DbContext> DbMock { get; private set; }
+
+            public DbMockHelper()
+            {
+                DbMock = new Mock<DbContext>();
+                T temp = It.IsAny<T>();
+                DbMock.Setup(x => x.Set<T>().Add(temp)).Returns(temp);
+            }
+        }
+
         [Fact]
         public void CreateArticle_CreateAnArticle_ReturnArticle()
         {
