@@ -40,5 +40,31 @@ namespace Newsify.Logic
                 // Log error here
             }
         }
+
+        public List<Comment> GetComments(int articleId)
+        {
+            try
+            {
+                if (articleId == null)
+                    throw new NotImplementedException();
+
+                using (var uow = new UnitOfWork(new NewsDBEntities()))
+                {
+                    var posts = uow.PostR.SearchFor(p => p.ArticleID == articleId).ToList();
+                    List<Comment> comments = new List<Comment>();
+                    foreach (var post in posts)
+                    {
+                        comments.Add(uow.CommentR.Get(post.CommentID));
+                    }
+
+                    return comments;
+                }
+            }
+            catch (Exception ex)
+            {
+                // log error here
+                return null;
+            }
+        }
     }
 }

@@ -45,7 +45,26 @@ namespace Newsify.DataApi.Controllers
                 // Log error here
                 return BadRequest("Something went wrong while saving comment.");
             }
-            return Unauthorized();
         }
+
+        [HttpGet]
+        [Route("~/api/Data/GetComments")]
+        public IHttpActionResult GetComments(int articleId)
+        {
+            try
+            {
+                DataAccess da = new DataAccess();
+                var comments = da.GetComments(articleId);
+
+                return Ok(comments);
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return BadRequest("Something went wrong processing the request.");
+            }
+        }
+
+
     }
 }
