@@ -62,5 +62,11 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Newsify.DAL\Newsify.DAL.csproj">
+      <Project>{358ccf46-7c90-495c-80a5-44d490f21572}</Project>
+      <Name>Newsify.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

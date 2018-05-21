@@ -19,9 +19,22 @@ namespace Newsify.DataApi.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Passed information isn't valid.");
+                }
+
+                var date = DateTime.Now;
+                var c = new Comment()
+                {
+                    Comment1 = comment.ToString(),
+                    CommentedAt = date,
+                    Modified = date
+                };
+
                 using (var uow = new UnitOfWork(new NewsDBEntities()))
                 {
-                    uow.CommentR.Add(comment);
+                    uow.CommentR.Create(c);
                     uow.Complete();
                 }
             }
