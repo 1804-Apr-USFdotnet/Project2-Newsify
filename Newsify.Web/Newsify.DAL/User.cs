@@ -26,11 +26,9 @@ namespace Newsify.DAL
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public System.DateTime BirthDate { get; set; }
-        public int Type { get; set; }
         public bool Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Post> Posts { get; set; }
-        public virtual UserType UserType { get; set; }
     }
 }

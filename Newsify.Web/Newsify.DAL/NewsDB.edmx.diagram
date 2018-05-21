@@ -11,12 +11,12 @@
         <EntityTypeShape EntityType="NewsDBModel.Source" Width="1.5" PointX="0.625" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="NewsDBModel.User" Width="1.5" PointX="5.5" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NewsDBModel.UserType" Width="1.5" PointX="4.125" PointY="9.25" IsExpanded="true" />
+
         <AssociationConnector Association="NewsDBModel.FK__Articles__Source__4BAC3F29" ManuallyRouted="false" />
         <AssociationConnector Association="NewsDBModel.FK__Posts__ArticleID__5629CD9C" ManuallyRouted="false" />
         <AssociationConnector Association="NewsDBModel.FK__Posts__CommentID__571DF1D5" ManuallyRouted="false" />
         <AssociationConnector Association="NewsDBModel.FK__Posts__ReplyTo__59063A47" ManuallyRouted="false" />
-        <AssociationConnector Association="NewsDBModel.FK__Posts__UserID__5812160E" ManuallyRouted="false" />
-        <AssociationConnector Association="NewsDBModel.FK__Users__Type__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="NewsDBModel.K__Posts__UserID" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

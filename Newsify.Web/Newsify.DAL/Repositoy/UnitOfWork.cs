@@ -19,7 +19,7 @@ namespace Newsify.DAL
             CommentR = new CommentRepo(newsDB);
             SourceR = new SourceRepo(newsDB);
             UserR = new UserRepo(newsDB);
-            UserTypeR = new UserTypeRepo(newsDB);
+            //UserTypeR = new UserTypeRepo(newsDB);
         }
 
         public IArticleRepo ArticleR { get; private set; }
