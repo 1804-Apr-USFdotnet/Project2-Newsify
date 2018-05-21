@@ -65,6 +65,60 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("~/api/Data/GetComment")]
+        public IHttpActionResult GetComment(GetComment gc)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Passed information isn't valid.");
+                }
 
+                DataAccess da = new DataAccess();
+                var comment = da.GetComment(gc.CommentId); // grab the comment
+
+                if (comment == null)
+                {
+                    return NotFound();
+                }
+
+                // Map the comment to WebComment before returning it to the client
+                var comm = Mapper.MapComment(comment, gc.ArticleId, gc.CommentId);
+
+                return Ok(comm);
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return BadRequest("Something went wrong processing the request.");
+            }
+        }
+
+        [HttpPut]
+        [Authorize(Roles = ("admin, user"))]
+        [Route("~/api/Data/UpdateComment")]
+        public IHttpActionResult UpdateComment(UpdateComment uc)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Passed information isn't valid.");
+                }
+
+                DataAccess da = new DataAccess();
+
+                if (da.UpdateComment(Mapper.MapComment(uc)))
+                    return Ok();
+                return BadRequest("Failed to update the comment.");
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return BadRequest("Something went wrong processing the request.");
+            }
+        }
     }
 }

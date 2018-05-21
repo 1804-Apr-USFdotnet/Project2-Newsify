@@ -45,9 +45,6 @@ namespace Newsify.Logic
         {
             try
             {
-                if (articleId == null)
-                    throw new NotImplementedException();
-
                 using (var uow = new UnitOfWork(new NewsDBEntities()))
                 {
                     var posts = uow.PostR.SearchFor(p => p.ArticleID == articleId).ToList();
@@ -64,6 +61,43 @@ namespace Newsify.Logic
             {
                 // log error here
                 return null;
+            }
+        }
+
+        public Comment GetComment(int commentId)
+        {
+            try
+            {
+                using (var uow = new UnitOfWork(new NewsDBEntities()))
+                {
+                    return uow.CommentR.SearchFor(c => c.ID == commentId).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                // log error here
+                return null;
+            }
+        }
+
+        public bool UpdateComment(Comment comment)
+        {
+            try
+            {
+                using (var uow = new UnitOfWork(new NewsDBEntities()))
+                {
+                    // Grab the comment from the database and update it
+                    var comm = uow.CommentR.SearchFor(c => c.ID == comment.ID).FirstOrDefault();
+                    comm.Comment1 = comment.Comment1;
+                    comm.Modified = comment.Modified;
+                    uow.Complete(); // save the changes to the database
+                }
+                return true; // successfully updated the comment
+            }
+            catch (Exception ex)
+            {
+                // log error here
+                return false; // failed to update the comment
             }
         }
     }
