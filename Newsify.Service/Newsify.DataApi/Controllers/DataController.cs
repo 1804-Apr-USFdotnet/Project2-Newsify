@@ -15,6 +15,7 @@ namespace Newsify.DataApi.Controllers
 {
     public class DataController : ApiController
     {
+        #region Comments
         [HttpPost]
         [Authorize(Roles = "admin, user")]
         [Route("~api/Data/AddComment")]
@@ -120,5 +121,28 @@ namespace Newsify.DataApi.Controllers
                 return BadRequest("Something went wrong processing the request.");
             }
         }
+
+        [HttpDelete]
+        [Authorize(Roles = ("admin, user"))]
+        [Route("~/api/Data/DeleteComment")]
+        public IHttpActionResult DeleteCommment(int commentId)
+        {
+            try
+            {
+                DataAccess da = new DataAccess();
+                da.DeleteComment(commentId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return Unauthorized();
+            }
+        }
+        #endregion Comments
+
+        #region Articles
+
+        #endregion Articles
     }
 }

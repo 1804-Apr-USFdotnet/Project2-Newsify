@@ -20,7 +20,8 @@ namespace Newsify.DataApi.Classes
                 {
                     Comment1 = wc.Comment,
                     CommentedAt = wc.CommentedAt,
-                    Modified = wc.CommentedAt
+                    Modified = wc.CommentedAt,
+                    Active = true
                 };
                 return c;
             }

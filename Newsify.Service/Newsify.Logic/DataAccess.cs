@@ -9,6 +9,7 @@ namespace Newsify.Logic
 {
     public class DataAccess
     {
+        #region Comments
         public void AddComment(Comment comment, string author, int articleId)
         {
             try
@@ -51,7 +52,9 @@ namespace Newsify.Logic
                     List<Comment> comments = new List<Comment>();
                     foreach (var post in posts)
                     {
-                        comments.Add(uow.CommentR.Get(post.CommentID));
+                        var comm = uow.CommentR.Get(post.CommentID);
+                        if (comm.Active)
+                            comments.Add(comm);
                     }
 
                     return comments;
@@ -70,7 +73,7 @@ namespace Newsify.Logic
             {
                 using (var uow = new UnitOfWork(new NewsDBEntities()))
                 {
-                    return uow.CommentR.SearchFor(c => c.ID == commentId).FirstOrDefault();
+                    return uow.CommentR.SearchFor(c => c.ID == commentId && c.Active).FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -100,5 +103,26 @@ namespace Newsify.Logic
                 return false; // failed to update the comment
             }
         }
+
+        public bool DeleteComment(int commentId)
+        {
+            try
+            {
+                using (var uow = new UnitOfWork(new NewsDBEntities()))
+                {
+                    // Grab the comment from the database and update it
+                    var comm = uow.CommentR.SearchFor(c => c.ID == commentId).FirstOrDefault();
+                    comm.Active = false; // mark the comment as deleted
+                    uow.Complete(); // save the changes to the database
+                }
+                return true; // successfully updated the comment
+            }
+            catch (Exception ex)
+            {
+                // log error here
+                return false; // failed to delete the comment
+            }
+        }
+        #endregion Comments
     }
 }
