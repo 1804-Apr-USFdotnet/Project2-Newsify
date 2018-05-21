@@ -6,7 +6,9 @@ using System.Net.Http;
 using System.Web.Http;
 using System.ComponentModel.DataAnnotations;
 using Newsify.DAL;
+using Newsify.Logic;
 using Newsify.DataApi.Models;
+using Newsify.DataApi.Classes;
 using NLog;
 
 namespace Newsify.DataApi.Controllers
@@ -14,6 +16,7 @@ namespace Newsify.DataApi.Controllers
     public class DataController : ApiController
     {
         [HttpPost]
+        [Authorize(Roles = "admin, user")]
         [Route("~api/Data/AddComment")]
         public IHttpActionResult AddComment(WebComment comment)
         {
@@ -24,18 +27,17 @@ namespace Newsify.DataApi.Controllers
                     return BadRequest("Passed information isn't valid.");
                 }
 
-                var date = DateTime.Now;
-                var c = new Comment()
+                var rc = Mapper.MapComment(comment);
+                if (rc != null)
                 {
-                    Comment1 = comment.ToString(),
-                    CommentedAt = date,
-                    Modified = date
-                };
+                    var da = new DataAccess();
+                    da.AddComment(rc, comment.Author, comment.ArticleId);
 
-                using (var uow = new UnitOfWork(new NewsDBEntities()))
+                    return Ok();
+                }
+                else
                 {
-                    uow.CommentR.Create(c);
-                    uow.Complete();
+                    throw new NotImplementedException();
                 }
             }
             catch (Exception ex)
@@ -43,7 +45,7 @@ namespace Newsify.DataApi.Controllers
                 // Log error here
                 return BadRequest("Something went wrong while saving comment.");
             }
-            return null;
+            return Unauthorized();
         }
     }
 }

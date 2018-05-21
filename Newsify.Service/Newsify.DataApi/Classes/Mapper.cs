@@ -9,18 +9,17 @@ using Newsify.DataApi.Models;
 
 namespace Newsify.DataApi.Classes
 {
-    public class Mapper
+    public static class Mapper
     {
-        public Comment MapComment(WebComment wc)
+        public static Comment MapComment(WebComment wc)
         {
             try
             {
-                var date = DateTime.Now;
                 var c = new Comment()
                 {
-                    Comment1 = wc.ToString(),
-                    CommentedAt = date,
-                    Modified = date
+                    Comment1 = wc.Comment,
+                    CommentedAt = wc.CommentedAt,
+                    Modified = wc.CommentedAt
                 };
                 return c;
             }
