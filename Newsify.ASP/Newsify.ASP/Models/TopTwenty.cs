@@ -18,10 +18,9 @@ namespace Newsify.ASP.Models
     {
         public async Task<List<Article>> GetTopTwentyAsync()
         {
-            News news = new News();
 
             var request = new TopHeadlinesRequest { Country = Countries.US };
-            var articles = await news.GetArticlesAsync(request);
+            var articles = await News.GetArticlesAsync(request);
 
             var top20 = new Articles();
 

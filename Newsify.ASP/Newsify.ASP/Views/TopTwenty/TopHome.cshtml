@@ -4,67 +4,33 @@
     ViewBag.Title = "TopHome";
 }
 
-<h2>TopHome</h2>
+<h1 style="text-align: center">Newsify Home</h1>
+<hr />
+<hr />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <caption>Top Twenty Articles</caption>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.sourceName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.author)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.url)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.urlToImage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.publishedAT)
-        </th>
-        <th></th>
-    </tr>
+@foreach (var item in Model)
+{
+    <table align="center">
+        <tr>
+            <td>
+                <a href="@Html.DisplayFor(modelItem => item.url)"><img src="@Html.DisplayFor(modelItem => item.urlToImage)" style="width:400px;height:300px;" /></a>
+            </td>
+        </tr>
+    </table>
+    <table align="center">
+        <tr>
+            <td>
+                <h4><strong>@Html.DisplayFor(modelItem => item.title)</strong></h4>
+            </td>
+        </tr>
+    </table>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.sourceName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.author)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.url)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.urlToImage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.publishedAT)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
-
-</table>
+    <table align="center">
+        <tr>
+            <td style="width: 600px; text-align: center">
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+        </tr>
+    </table>
+    <hr />
+    }
