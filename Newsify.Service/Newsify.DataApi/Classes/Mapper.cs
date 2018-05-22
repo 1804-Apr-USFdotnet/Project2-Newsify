@@ -76,7 +76,24 @@ namespace Newsify.DataApi.Classes
         #endregion Comment Mapper
 
         #region Article Mapper
+        // Map ArticleSource object to DAL.Source object
+        public static Source MapSource(ArticleSource source)
+        {
+            try
+            {
+                if (source == null)
+                    throw new NotImplementedException();
 
+                var src = new Source() { Name = source.Name};
+                
+                return src;
+            }
+            catch (Exception ex)
+            {
+                // log error here
+                return null;
+            }
+        }
         #endregion Article Mapper
     }
 }

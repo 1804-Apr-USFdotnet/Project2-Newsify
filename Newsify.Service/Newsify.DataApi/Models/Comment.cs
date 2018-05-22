@@ -41,8 +41,4 @@ namespace Newsify.DataApi.Models
         public DateTime Modified { get; set; }
     }
     #endregion Comment Models
-
-    #region Article Models
-
-    #endregion Article Models
 }

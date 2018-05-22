@@ -142,7 +142,36 @@ namespace Newsify.DataApi.Controllers
         #endregion Comments
 
         #region Articles
+        [HttpGet]
+        [Route("~api/Data/GetArticlesBySource")]
+        public IHttpActionResult GetArticles(ArticleSource source)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Passed information isn't valid.");
+                }
 
+                var src = Mapper.MapSource(source);
+                if (src != null)
+                {
+                    var da = new DataAccess();
+                    var articles = da.GetArticles(src);
+
+                    return Ok(articles);
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return BadRequest("Something went wrong while saving comment.");
+            }
+        }
         #endregion Articles
     }
 }

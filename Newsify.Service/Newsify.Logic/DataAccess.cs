@@ -124,5 +124,76 @@ namespace Newsify.Logic
             }
         }
         #endregion Comments
+
+        #region Articles
+        // Search and return a list of articles from the given Source
+        public List<Article> GetArticles(Source source)
+        {
+            try
+            {
+                var articles = new List<Article>();
+                using (var uow = new UnitOfWork(new NewsDBEntities()))
+                {
+                    // Grab all matching sources in the database
+                    var sources = uow.SourceR.SearchFor(s => s.Name == source.Name).ToList();
+
+                    // Find all articles from the possible sources
+                    foreach (var src in sources)
+                    {
+                        if (articles.Count == 100)
+                        {
+                            // Let's break out of the foreach loop; We've reached the maximum number of articles for the search
+                            break;
+                        }
+                        var arts = uow.ArticleR.SearchFor(a => a.Source == src.PK && a.Active).ToList(); // All articles from the src
+                        foreach (var article in arts)
+                        {
+                            if (articles.Count == 100)
+                            {
+                                // We've reached the maximum number of articles for the search
+                                break;
+                            }
+                            articles.Add(article);
+                        }
+                    }
+                }
+
+                return articles;
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return null;
+            }
+        }
+
+        // Search and return a list of articles published on the given date
+        public List<Article> GetArticles(DateTime publishedDate)
+        {
+            try
+            {
+                var articles = new List<Article>();
+                using (var uow = new UnitOfWork(new NewsDBEntities()))
+                {
+                    // Find all articles that match the search criteria
+                    articles = uow.ArticleR.SearchFor(a => a.PublishAt == publishedDate && a.Active).ToList();
+                    
+                    if (articles.Count > 100)
+                    {
+                        // Only want to return a maximum of hundred articles
+                        var itemsToRemove = articles.Count - 100;
+                        articles.RemoveRange(100, itemsToRemove); // Remove all the extra articles
+                    }
+                }
+
+                return articles;
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return null;
+            }
+        }
+        #endregion Articles
     }
 }
