@@ -57,7 +57,6 @@ namespace Newsify.DAL.Tests
             var user = new User();
             mockContext.Setup(x => x.Set<User>().Add(user)).Returns(user);
 
-
             Repository<User> repository = new Repository<User>(mockContext.Object);
             var expected = new User();
             var temp = repository.Create(expected);
