@@ -135,6 +135,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="connectionString.config" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
