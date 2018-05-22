@@ -30,7 +30,7 @@ namespace Newsify.DAL
 
         public override bool Validation(User entity)
         {
-            if (entity.UserName.Length <= 30 && DB.Set<User>().Where(x => x.UserName == entity.UserName) == null)
+            if (entity.UserName.Length <= 30 && DB.Set<User>().Where(x => x.UserName == entity.UserName).ToList().Count <= 0)
             {
                 return true;
             } else
