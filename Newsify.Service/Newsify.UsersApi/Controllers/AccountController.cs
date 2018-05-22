@@ -247,7 +247,7 @@ namespace Newsify.UserApi.Controllers
             }
             catch (Exception ex)
             {
-                // log error here
+                throw ex;// log error here
             }
         }
         #endregion
