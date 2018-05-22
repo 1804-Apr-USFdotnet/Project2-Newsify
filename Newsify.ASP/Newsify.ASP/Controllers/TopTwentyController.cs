@@ -10,9 +10,9 @@ namespace Newsify.ASP.Controllers
 {
     public class TopTwentyController : Controller
     {
-    TopTwenty top = new TopTwenty();
-    // GET: TopTwenty
-    public ActionResult Index()
+        TopTwenty top = new TopTwenty();
+        // GET: TopTwenty
+        public ActionResult Index()
         {
             return View();
         }
@@ -20,8 +20,12 @@ namespace Newsify.ASP.Controllers
         // GET: TopTwenty/Details/5
         public async Task<ActionResult> TopHome()
         {
-            var name = await top.GetTopTwenty();
-            return View(await top.GetTopTwenty());
+            if (top == null)
+                top = new TopTwenty();
+
+            var top20 = await top.GetTopTwentyAsync();
+
+            return View(top20);
         }
         // GET: TopTwenty/Details/5
         public ActionResult Details(int id)

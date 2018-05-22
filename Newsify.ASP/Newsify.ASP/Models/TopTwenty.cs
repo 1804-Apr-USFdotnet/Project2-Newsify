@@ -9,23 +9,25 @@ using NewsAPI;
 using NewsAPI.Models;
 using NewsAPI.Constants;
 using System.Threading.Tasks;
+using Newsify.ASP.Classes;
 
 namespace Newsify.ASP.Models
 {
 
     public class TopTwenty
     {
-        public async Task<IEnumerable<Article>> GetTopTwenty()
+        public async Task<List<Article>> GetTopTwentyAsync()
         {
-            string apiKey = "33b909af4e294034ad07bd3546790502"; // My NewsAPI key
-            var news = new NewsApiClient(apiKey);
-            var top2 = new TopHeadlinesRequest { Country = Countries.US };
-            var top = await news.GetTopHeadlinesAsync(top2);
-            Articles arts = new Articles();
-            Article art = new Article();
+            News news = new News();
 
-            foreach (var article in top.Articles)
+            var request = new TopHeadlinesRequest { Country = Countries.US };
+            var articles = await news.GetArticlesAsync(request);
+
+            var top20 = new Articles();
+
+            foreach (var article in articles)
             {
+                Article art = new Article();
                 art.sourceName = article.Source.Name;
                 art.author = article.Author;
                 art.title = article.Title;
@@ -34,9 +36,9 @@ namespace Newsify.ASP.Models
                 art.urlToImage = article.UrlToImage;
                 art.publishedAT = article.PublishedAt.ToString();
 
-                arts.data.Add(art);
+                top20.data.Add(art);
             }
-            return arts.data;
+            return top20.data;
         }
 
 }

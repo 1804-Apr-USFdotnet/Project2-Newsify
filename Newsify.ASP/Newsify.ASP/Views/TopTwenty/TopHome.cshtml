@@ -1,4 +1,4 @@
-﻿@model  System.Threading.Tasks.Task<IEnumerable<Newsify.ASP.Models.Article>>
+﻿@model IEnumerable<Newsify.ASP.Models.Article>
 
 @{
     ViewBag.Title = "TopHome";
@@ -10,27 +10,28 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
+    <caption>Top Twenty Articles</caption>
     <tr>
         <th>
-            @*@Html.DisplayNameFor(model => model.)*@
+            @Html.DisplayNameFor(model => model.sourceName)
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.author)*@
+            @Html.DisplayNameFor(model => model.author)
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.title)*@
+            @Html.DisplayNameFor(model => model.title)
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.description)*@
+            @Html.DisplayNameFor(model => model.description)
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.url)*@
+            @Html.DisplayNameFor(model => model.url)
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.urlToImage)*@
+            @Html.DisplayNameFor(model => model.urlToImage)
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.publishedAT)*@
+            @Html.DisplayNameFor(model => model.publishedAT)
         </th>
         <th></th>
     </tr>
