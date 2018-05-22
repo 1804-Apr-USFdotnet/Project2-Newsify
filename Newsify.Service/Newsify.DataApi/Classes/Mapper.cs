@@ -11,6 +11,7 @@ namespace Newsify.DataApi.Classes
 {
     public static class Mapper
     {
+        #region Comment Mapper
         // Map the WebComment to DAL.Comment
         public static Comment MapComment(WebComment wc)
         {
@@ -72,5 +73,10 @@ namespace Newsify.DataApi.Classes
                 return null; // return nothing to the caller
             }
         }
+        #endregion Comment Mapper
+
+        #region Article Mapper
+
+        #endregion Article Mapper
     }
 }

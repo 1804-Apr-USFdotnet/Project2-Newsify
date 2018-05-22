@@ -6,6 +6,7 @@ using System.Web;
 
 namespace Newsify.DataApi.Models
 {
+    #region Comment Models
     public class WebComment
     {
         [Required]
@@ -39,4 +40,9 @@ namespace Newsify.DataApi.Models
         [Required]
         public DateTime Modified { get; set; }
     }
+    #endregion Comment Models
+
+    #region Article Models
+
+    #endregion Article Models
 }
