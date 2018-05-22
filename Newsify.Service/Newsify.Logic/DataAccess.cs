@@ -134,8 +134,20 @@ namespace Newsify.Logic
                 var articles = new List<Article>();
                 using (var uow = new UnitOfWork(new NewsDBEntities()))
                 {
+                    var sources = new List<Source>();
                     // Grab all matching sources in the database
-                    var sources = uow.SourceR.SearchFor(s => s.Name == source.Name).ToList();
+                    if (source.Country != null)
+                    {
+                        sources = uow.SourceR.SearchFor(s => s.Country == source.Country).ToList(); // Articles from given country
+                    }
+                    else if (source.Language != null)
+                    {
+                        sources = uow.SourceR.SearchFor(s => s.Language == source.Language).ToList(); // Articles in given language
+                    }
+                    else
+                    {
+                        sources = uow.SourceR.SearchFor(s => s.Name == source.Name).ToList(); // Articles from given source
+                    }
 
                     // Find all articles from the possible sources
                     foreach (var src in sources)
@@ -178,6 +190,41 @@ namespace Newsify.Logic
                     // Find all articles that match the search criteria
                     articles = uow.ArticleR.SearchFor(a => a.PublishAt == publishedDate && a.Active).ToList();
                     
+                    if (articles.Count > 100)
+                    {
+                        // Only want to return a maximum of hundred articles
+                        var itemsToRemove = articles.Count - 100;
+                        articles.RemoveRange(100, itemsToRemove); // Remove all the extra articles
+                    }
+                }
+
+                return articles;
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return null;
+            }
+        }
+
+        // Search and return a list of articles with matching criteria
+        public List<Article> GetArticles(string title = null, string topic = null)
+        {
+            try
+            {
+                var articles = new List<Article>();
+                using (var uow = new UnitOfWork(new NewsDBEntities()))
+                {
+                    // Find all articles that match the search criteria
+                    if (title != null)
+                    {
+                        articles = uow.ArticleR.SearchFor(a => a.Title.Contains(title) && a.Active).ToList();
+                    }
+                    else if (topic != null)
+                    {
+                        articles = uow.ArticleR.SearchFor(a => a.Topic.Contains(topic) && a.Active).ToList();
+                    }
+
                     if (articles.Count > 100)
                     {
                         // Only want to return a maximum of hundred articles
