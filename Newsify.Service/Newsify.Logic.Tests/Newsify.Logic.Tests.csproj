@@ -92,6 +92,20 @@
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.9.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Newsify.DataApi\Newsify.DataApi.csproj">
+      <Project>{dc4e7724-4bc9-497c-b91f-4b6eda86a43e}</Project>
+      <Name>Newsify.DataApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Newsify.Logic\Newsify.Logic.csproj">
+      <Project>{2edc828f-1956-4ab0-82e1-130040c13c52}</Project>
+      <Name>Newsify.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Newsify.UsersApi\Newsify.UsersApi.csproj">
+      <Project>{25fe2159-1fcf-459a-938d-72b019d68254}</Project>
+      <Name>Newsify.UsersApi</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
