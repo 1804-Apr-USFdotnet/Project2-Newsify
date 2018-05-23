@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Newsify.DataApi.Models
 {
-    public class WebComment
+    public class WComment
     {
         public int ID { get; set; }
         public DateTime CommentedAt { get; set; }
