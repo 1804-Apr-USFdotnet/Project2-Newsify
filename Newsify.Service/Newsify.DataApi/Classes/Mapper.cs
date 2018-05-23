@@ -94,6 +94,44 @@ namespace Newsify.DataApi.Classes
                 return null;
             }
         }
+
+        // Map ArticleCountry object to DAL.Source object
+        public static Source MapSource(ArticleCountry country)
+        {
+            try
+            {
+                if (country == null)
+                    throw new NotImplementedException();
+
+                var src = new Source() { Country = country.Country };
+
+                return src;
+            }
+            catch (Exception ex)
+            {
+                // log error here
+                return null;
+            }
+        }
+
+        // Map ArticleLanguage object to DAL.Source object
+        public static Source MapSource(ArticleLanguage lang)
+        {
+            try
+            {
+                if (lang == null)
+                    throw new NotImplementedException();
+
+                var src = new Source() { Language = lang.Language };
+
+                return src;
+            }
+            catch (Exception ex)
+            {
+                // log error here
+                return null;
+            }
+        }
         #endregion Article Mapper
     }
 }

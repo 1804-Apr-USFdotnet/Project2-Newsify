@@ -143,7 +143,7 @@ namespace Newsify.DataApi.Controllers
 
         #region Articles
         [HttpGet]
-        [Route("~api/Data/GetArticlesBySource")]
+        [Route("~/api/Data/GetArticlesBySourceName")]
         public IHttpActionResult GetArticles(ArticleSource source)
         {
             try
@@ -158,6 +158,10 @@ namespace Newsify.DataApi.Controllers
                 {
                     var da = new DataAccess();
                     var articles = da.GetArticles(src);
+                    if (articles == null)
+                    {
+                        return NotFound();
+                    }
 
                     return Ok(articles);
                 }
@@ -165,6 +169,157 @@ namespace Newsify.DataApi.Controllers
                 {
                     throw new NotImplementedException();
                 }
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return BadRequest("Something went wrong while saving comment.");
+            }
+        }
+
+        [HttpGet]
+        [Route("~/api/Data/GetArticlesByCountry")]
+        public IHttpActionResult GetArticles(ArticleCountry country)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Passed information isn't valid.");
+                }
+
+                var src = Mapper.MapSource(country);
+                if (src != null)
+                {
+                    var da = new DataAccess();
+                    var articles = da.GetArticles(src);
+                    if (articles == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(articles);
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return BadRequest("Something went wrong while saving comment.");
+            }
+        }
+
+        [HttpGet]
+        [Route("~/api/Data/GetArticlesByLanguage")]
+        public IHttpActionResult GetArticles(ArticleLanguage language)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Passed information isn't valid.");
+                }
+
+                var src = Mapper.MapSource(language);
+                if (src != null)
+                {
+                    var da = new DataAccess();
+                    var articles = da.GetArticles(src);
+                    if (articles == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(articles);
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return BadRequest("Something went wrong while saving comment.");
+            }
+        }
+
+        [HttpGet]
+        [Route("~/api/Data/GetArticlesByTopic")]
+        public IHttpActionResult GetArticles(ArticleTopic topic)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Passed information isn't valid.");
+                }
+
+                var da = new DataAccess();
+                var articles = da.GetArticles(null, topic.Topic);
+                if (articles == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(articles);
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return BadRequest("Something went wrong while saving comment.");
+            }
+        }
+
+        [HttpGet]
+        [Route("~/api/Data/GetArticlesByTitle")]
+        public IHttpActionResult GetArticles(ArticleTitle title)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Passed information isn't valid.");
+                }
+
+                var da = new DataAccess();
+                var articles = da.GetArticles(title.Title);
+                if (articles == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(articles);
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return BadRequest("Something went wrong while saving comment.");
+            }
+        }
+
+        [HttpGet]
+        [Route("~/api/Data/GetArticlesByPublishedDate")]
+        public IHttpActionResult GetArticles(ArticlePulished pulished)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Passed information isn't valid.");
+                }
+
+                var da = new DataAccess();
+                var articles = da.GetArticles(pulished.PublishedDate);
+                if (articles == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(articles);
             }
             catch (Exception ex)
             {
