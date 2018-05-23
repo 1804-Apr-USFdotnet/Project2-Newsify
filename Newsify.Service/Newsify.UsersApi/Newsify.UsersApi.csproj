@@ -156,6 +156,10 @@
       <Project>{358ccf46-7c90-495c-80a5-44d490f21572}</Project>
       <Name>Newsify.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Newsify.DataApi\Newsify.DataApi.csproj">
+      <Project>{dc4e7724-4bc9-497c-b91f-4b6eda86a43e}</Project>
+      <Name>Newsify.DataApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Newsify.Logic\Newsify.Logic.csproj">
       <Project>{2edc828f-1956-4ab0-82e1-130040c13c52}</Project>
       <Name>Newsify.Logic</Name>
