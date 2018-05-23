@@ -136,6 +136,10 @@
       <Project>{2edc828f-1956-4ab0-82e1-130040c13c52}</Project>
       <Name>Newsify.Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Newsify.UsersApi\Newsify.UsersApi.csproj">
+      <Project>{25fe2159-1fcf-459a-938d-72b019d68254}</Project>
+      <Name>Newsify.UsersApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
