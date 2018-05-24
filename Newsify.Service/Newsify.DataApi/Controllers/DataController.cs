@@ -18,7 +18,7 @@ namespace Newsify.DataApi.Controllers
         #region Comments
         [HttpPost]
         [Authorize(Roles = "admin, user")]
-        [Route("~api/Data/AddComment")]
+        [Route("~/api/Data/AddComment")]
         public IHttpActionResult AddComment(WebComment comment)
         {
             try
