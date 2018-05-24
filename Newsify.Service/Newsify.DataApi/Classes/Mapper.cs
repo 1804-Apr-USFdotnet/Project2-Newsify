@@ -156,6 +156,31 @@ namespace Newsify.DataApi.Classes
                 return null;
             }
         }
+
+        // Map List<DAL.Artcle> object to List<WebArticle> object
+        public static List<WebArticle> MapArticle(List<Article> articles)
+        {
+            try
+            {
+                if (articles == null)
+                    return null;
+
+                // Store WebArticles
+                var arts = new List<WebArticle>();
+                foreach (var a in articles)
+                {
+                    var art = MapArticle(a);
+                    if (art != null)
+                        arts.Add(art);
+                }
+                return arts;
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return null;
+            }
+        }
         #endregion Article Mapper
     }
 }

@@ -164,11 +164,11 @@ namespace Newsify.DataApi.Controllers
                     }
 
                     // Let's convert the article objects
-                    var articles = new List<WebArticle>();
-                    foreach (var a in arts)
+                    var articles = Mapper.MapArticle(arts);
+
+                    if (articles == null)
                     {
-                        var art = Mapper.MapArticle(a);
-                        articles.Add(art);
+                        throw new NotImplementedException();
                     }
 
                     return Ok(articles);
@@ -207,11 +207,11 @@ namespace Newsify.DataApi.Controllers
                     }
 
                     // Let's convert the article objects
-                    var articles = new List<WebArticle>();
-                    foreach (var a in arts)
+                    var articles = Mapper.MapArticle(arts);
+
+                    if (articles == null)
                     {
-                        var art = Mapper.MapArticle(a);
-                        articles.Add(art);
+                        throw new NotImplementedException();
                     }
 
                     return Ok(articles);
@@ -250,11 +250,11 @@ namespace Newsify.DataApi.Controllers
                     }
 
                     // Let's convert the article objects
-                    var articles = new List<WebArticle>();
-                    foreach (var a in arts)
+                    var articles = Mapper.MapArticle(arts);
+
+                    if (articles == null)
                     {
-                        var art = Mapper.MapArticle(a);
-                        articles.Add(art);
+                        throw new NotImplementedException();
                     }
 
                     return Ok(articles);
@@ -290,13 +290,13 @@ namespace Newsify.DataApi.Controllers
                 }
 
                 // Let's convert the article objects
-                var articles = new List<WebArticle>();
-                foreach (var a in arts)
+                var articles = Mapper.MapArticle(arts);
+
+                if (articles == null)
                 {
-                    var art = Mapper.MapArticle(a);
-                    articles.Add(art);
+                    throw new NotImplementedException();
                 }
-                
+
                 return Ok(articles);
             }
             catch (Exception ex)
@@ -325,11 +325,11 @@ namespace Newsify.DataApi.Controllers
                 }
 
                 // Let's convert the article objects
-                var articles = new List<WebArticle>();
-                foreach (var a in arts)
+                var articles = Mapper.MapArticle(arts);
+
+                if (articles == null)
                 {
-                    var art = Mapper.MapArticle(a);
-                    articles.Add(art);
+                    throw new NotImplementedException();
                 }
 
                 return Ok(articles);
@@ -360,11 +360,11 @@ namespace Newsify.DataApi.Controllers
                 }
 
                 // Let's convert the article objects
-                var articles = new List<WebArticle>();
-                foreach (var a in arts)
+                var articles = Mapper.MapArticle(arts);
+
+                if (articles == null)
                 {
-                    var art = Mapper.MapArticle(a);
-                    articles.Add(art);
+                    throw new NotImplementedException();
                 }
 
                 return Ok(articles);
