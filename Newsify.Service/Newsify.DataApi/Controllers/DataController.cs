@@ -66,7 +66,7 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("~/api/Data/GetComment")]
         public IHttpActionResult GetComment(GetComment gc)
         {
@@ -142,7 +142,7 @@ namespace Newsify.DataApi.Controllers
         #endregion Comments
 
         #region Articles
-        [HttpGet]
+        [HttpPost]
         [Route("~/api/Data/GetArticlesBySourceName")]
         public IHttpActionResult GetArticles(ArticleSource source)
         {
@@ -157,10 +157,18 @@ namespace Newsify.DataApi.Controllers
                 if (src != null)
                 {
                     var da = new DataAccess();
-                    var articles = da.GetArticles(src);
-                    if (articles == null)
+                    var arts = da.GetArticles(src);
+                    if (arts == null)
                     {
                         return NotFound();
+                    }
+
+                    // Let's convert the article objects
+                    var articles = new List<WebArticle>();
+                    foreach (var a in arts)
+                    {
+                        var art = Mapper.MapArticle(a);
+                        articles.Add(art);
                     }
 
                     return Ok(articles);
@@ -177,7 +185,7 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("~/api/Data/GetArticlesByCountry")]
         public IHttpActionResult GetArticles(ArticleCountry country)
         {
@@ -192,10 +200,18 @@ namespace Newsify.DataApi.Controllers
                 if (src != null)
                 {
                     var da = new DataAccess();
-                    var articles = da.GetArticles(src);
-                    if (articles == null)
+                    var arts = da.GetArticles(src);
+                    if (arts == null)
                     {
                         return NotFound();
+                    }
+
+                    // Let's convert the article objects
+                    var articles = new List<WebArticle>();
+                    foreach (var a in arts)
+                    {
+                        var art = Mapper.MapArticle(a);
+                        articles.Add(art);
                     }
 
                     return Ok(articles);
@@ -212,7 +228,7 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("~/api/Data/GetArticlesByLanguage")]
         public IHttpActionResult GetArticles(ArticleLanguage language)
         {
@@ -227,10 +243,18 @@ namespace Newsify.DataApi.Controllers
                 if (src != null)
                 {
                     var da = new DataAccess();
-                    var articles = da.GetArticles(src);
-                    if (articles == null)
+                    var arts = da.GetArticles(src);
+                    if (arts == null)
                     {
                         return NotFound();
+                    }
+
+                    // Let's convert the article objects
+                    var articles = new List<WebArticle>();
+                    foreach (var a in arts)
+                    {
+                        var art = Mapper.MapArticle(a);
+                        articles.Add(art);
                     }
 
                     return Ok(articles);
@@ -247,7 +271,7 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("~/api/Data/GetArticlesByTopic")]
         public IHttpActionResult GetArticles(ArticleTopic topic)
         {
@@ -259,12 +283,20 @@ namespace Newsify.DataApi.Controllers
                 }
 
                 var da = new DataAccess();
-                var articles = da.GetArticles(null, topic.Topic);
-                if (articles == null)
+                var arts = da.GetArticles(null, topic.Topic);
+                if (arts == null)
                 {
                     return NotFound();
                 }
 
+                // Let's convert the article objects
+                var articles = new List<WebArticle>();
+                foreach (var a in arts)
+                {
+                    var art = Mapper.MapArticle(a);
+                    articles.Add(art);
+                }
+                
                 return Ok(articles);
             }
             catch (Exception ex)
@@ -274,7 +306,7 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("~/api/Data/GetArticlesByTitle")]
         public IHttpActionResult GetArticles(ArticleTitle title)
         {
@@ -286,10 +318,18 @@ namespace Newsify.DataApi.Controllers
                 }
 
                 var da = new DataAccess();
-                var articles = da.GetArticles(title.Title);
-                if (articles == null)
+                var arts = da.GetArticles(title.Title);
+                if (arts == null)
                 {
                     return NotFound();
+                }
+
+                // Let's convert the article objects
+                var articles = new List<WebArticle>();
+                foreach (var a in arts)
+                {
+                    var art = Mapper.MapArticle(a);
+                    articles.Add(art);
                 }
 
                 return Ok(articles);
@@ -301,7 +341,7 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("~/api/Data/GetArticlesByPublishedDate")]
         public IHttpActionResult GetArticles(ArticlePulished pulished)
         {
@@ -313,10 +353,18 @@ namespace Newsify.DataApi.Controllers
                 }
 
                 var da = new DataAccess();
-                var articles = da.GetArticles(pulished.PublishedDate);
-                if (articles == null)
+                var arts = da.GetArticles(pulished.PublishedDate);
+                if (arts == null)
                 {
                     return NotFound();
+                }
+
+                // Let's convert the article objects
+                var articles = new List<WebArticle>();
+                foreach (var a in arts)
+                {
+                    var art = Mapper.MapArticle(a);
+                    articles.Add(art);
                 }
 
                 return Ok(articles);
