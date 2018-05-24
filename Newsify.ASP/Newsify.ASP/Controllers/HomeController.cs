@@ -12,7 +12,7 @@ namespace Newsify.ASP.Controllers
     {
         Headlines top = new Headlines();
 
-        // GET: TopTwenty/Details/5
+        // GET: Current Top Headlines
         public async Task<ActionResult> Index()
         {
             if (top == null)
@@ -22,75 +22,32 @@ namespace Newsify.ASP.Controllers
 
             return View(top20);
         }
-        // GET: TopTwenty/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: TopTwenty/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: TopTwenty/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        // GET: Change to the About Us view
+        public ActionResult About()
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
                 return View();
             }
+            catch (Exception ex)
+            {
+                // Log error here
+                return RedirectToAction("Index"); // Go back to the Home Page
+            }
         }
 
-        // GET: TopTwenty/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: TopTwenty/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        // GET: Change to the Contact Us view
+        public ActionResult Contact()
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
                 return View();
             }
-        }
-
-        // GET: TopTwenty/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: TopTwenty/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
+            catch (Exception ex)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                // Log error here
+                return RedirectToAction("Index"); // Go back to the Home Page
             }
         }
     }
