@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -19,7 +18,7 @@ namespace Newsify.UserApi.Controllers
 
         #region Authentication
 
-        private static Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         [HttpPost]
         [Route("~/api/Account/Login")]
@@ -67,7 +66,7 @@ namespace Newsify.UserApi.Controllers
             }
             catch (Exception ex)
             {
-                logger.Error(ex, user.UserName + " attempted to log off and threw an exception:" + ex.Message);
+                logger.Error(ex, Request.GetOwinContext().Authentication.User.Identity.GetUserName() + " attempted to log off and threw an exception:" + ex.Message);
                 return BadRequest("something went wrong.");
             }
         }

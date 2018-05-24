@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NLog;
 using Newsify.DAL;
 
 namespace Newsify.Logic
 {
     public class DataAccess
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         #region Comments
         public void AddComment(Comment comment, string author, int articleId)
         {
             try
             {
                 if (comment == null)
+                {
+                    logger.Error("Trying to add comment, comment was null");
                     throw new NotImplementedException();
+                }
 
                 using (var uow = new UnitOfWork(new NewsDBEntities()))
                 {
@@ -30,15 +34,16 @@ namespace Newsify.Logic
                     };
                     uow.PostR.Create(post);// Add record in the Posts Table
                     uow.Complete(); // save the changes
+                    logger.Info("Comment " + comment.ID + " was created by " + author + " on the article " + articleId);
                 }
             }
             catch (NotImplementedException nex)
             {
-                // Log error here
+                logger.Error(nex, nex.Message);
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "An error was thrown when trying to add a comment on article " + articleId + " by " + author + ": " + ex.Message);
             }
         }
 
@@ -62,7 +67,7 @@ namespace Newsify.Logic
             }
             catch (Exception ex)
             {
-                // log error here
+                logger.Error(ex, "GetComments() failed on article " + articleId + ": " + ex.Message);
                 return null;
             }
         }
@@ -78,7 +83,7 @@ namespace Newsify.Logic
             }
             catch (Exception ex)
             {
-                // log error here
+                logger.Error(ex, "GetComment() failed on comment " + commentId + ": " + ex.Message);
                 return null;
             }
         }
@@ -93,13 +98,14 @@ namespace Newsify.Logic
                     var comm = uow.CommentR.SearchFor(c => c.ID == comment.ID).FirstOrDefault();
                     comm.Comment1 = comment.Comment1;
                     comm.Modified = comment.Modified;
+                    logger.Info("Comment " + comment.ID + " was updated.");
                     uow.Complete(); // save the changes to the database
                 }
                 return true; // successfully updated the comment
             }
             catch (Exception ex)
             {
-                // log error here
+                logger.Error(ex, "Comment update failed on comment " + comment.ID + ": " + ex.Message);
                 return false; // failed to update the comment
             }
         }
@@ -119,7 +125,7 @@ namespace Newsify.Logic
             }
             catch (Exception ex)
             {
-                // log error here
+                logger.Error(ex, "Delete comment failed on comment " + commentId + ": " + ex.Message);
                 return false; // failed to delete the comment
             }
         }
@@ -174,7 +180,7 @@ namespace Newsify.Logic
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "GetArticles from source " + source.Id + " failed: " + ex.Message);
                 return null;
             }
         }
@@ -202,7 +208,7 @@ namespace Newsify.Logic
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "GetArticles from date " + publishedDate + " failed: " + ex.Message);
                 return null;
             }
         }
@@ -237,7 +243,7 @@ namespace Newsify.Logic
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "GetArticles from title failed: " + ex.Message);
                 return null;
             }
         }
