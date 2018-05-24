@@ -9,14 +9,13 @@ using NewsAPI;
 using NewsAPI.Models;
 using NewsAPI.Constants;
 using System.Threading.Tasks;
-using Newsify.ASP.Classes;
-
-namespace Newsify.ASP.Models
+using Newsify.ASP.Models;
+namespace Newsify.ASP.Classes
 {
 
-    public class TopTwenty
+    public class Headlines
     {
-        public async Task<List<Article>> GetTopTwentyAsync()
+        public async Task<List<Models.Article>> GetHeadlinesAsync()
         {
 
             var request = new TopHeadlinesRequest { Country = Countries.US };
@@ -26,7 +25,7 @@ namespace Newsify.ASP.Models
 
             foreach (var article in articles)
             {
-                Article art = new Article();
+                Models.Article art = new Models.Article();
                 art.sourceName = article.Source.Name;
                 art.author = article.Author;
                 art.title = article.Title;
@@ -39,23 +38,5 @@ namespace Newsify.ASP.Models
             }
             return top20.data;
         }
-
-}
-
-    public class Articles
-    {
-
-        public List<Article> data { get; set; }
-        public Articles() { data = new List<Article>(); }
     }
-    public class Article
-        {
-            public string sourceName { get; set; }
-            public string author { get; set; }
-            public string title { get; set; }
-            public string description { get; set; }
-            public string url { get; set; }
-            public string urlToImage { get; set; }
-            public string publishedAT { get; set; }
-        }
 }
