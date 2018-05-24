@@ -17,7 +17,7 @@ namespace Newsify.DataApi.Models
         public DateTime CommentedAt { get; set; }
         [Required]
         public int ArticleId { get; set; }
-        [Required]
+        
         public int CommentId { get; set; }
     }
 
