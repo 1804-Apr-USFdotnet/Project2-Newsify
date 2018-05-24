@@ -19,7 +19,7 @@ namespace Newsify.UserApi.Controllers
 
         [HttpPost]
         [Route("~/api/Account/Login")]
-        public IHttpActionResult Login(DAL.User user)
+        public IHttpActionResult Login(Models.User user)
         {
             if (ModelState.IsValid)
             {
@@ -47,15 +47,10 @@ namespace Newsify.UserApi.Controllers
 
         [HttpPost]
         [Route("~/api/Account/Logoff")]
-        public IHttpActionResult Logoff(Models.User user)
+        public IHttpActionResult Logoff()
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest("Passed information isn't valid.");
-                }
-
                 Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
 
                 return Ok();
@@ -69,7 +64,7 @@ namespace Newsify.UserApi.Controllers
 
         [HttpPost]
         [Route("~/api/Account/Register")]
-        public IHttpActionResult Register(DAL.User newUser)
+        public IHttpActionResult Register(Account newUser)
         {
             if (!ModelState.IsValid)
             {
@@ -94,7 +89,16 @@ namespace Newsify.UserApi.Controllers
             // Add user to NewsDB so we can link comments to the user
             using (NewsDBEntities newsDB = new NewsDBEntities())
             {
-                newsDB.Users.Add(newUser);
+                var u = new DAL.User()
+                {
+                    UserName = newUser.UserName,
+                    Password = user.PasswordHash,
+                    FirstName = newUser.FirstName,
+                    LastName = newUser.LastNmae,
+                    BirthDate = newUser.BirthDate,
+                    Active = true
+                };
+                newsDB.Users.Add(u);
                 newsDB.SaveChanges();
             }
             return Ok();
@@ -103,7 +107,7 @@ namespace Newsify.UserApi.Controllers
         [HttpPost]
         [Authorize(Roles = "admin")]
         [Route("~/api/Account/RegisterAdmin")]
-        public IHttpActionResult RegisterAdmin(DAL.User newAdmin)
+        public IHttpActionResult RegisterAdmin(Account newAdmin)
         {
             try
             {
@@ -131,7 +135,16 @@ namespace Newsify.UserApi.Controllers
                 // Add user to NewsDB so we can link comments to the user
                 using (NewsDBEntities newsDB = new NewsDBEntities())
                 {
-                    newsDB.Users.Add(newAdmin);
+                    var u = new DAL.User()
+                    {
+                        UserName = newAdmin.UserName,
+                        Password = user.PasswordHash,
+                        FirstName = newAdmin.FirstName,
+                        LastName = newAdmin.LastNmae,
+                        BirthDate = newAdmin.BirthDate,
+                        Active = true
+                    };
+                    newsDB.Users.Add(u);
                     newsDB.SaveChanges();
                 }
                 return Ok();
@@ -162,7 +175,7 @@ namespace Newsify.UserApi.Controllers
                 var user = userManager.FindById(Request.GetOwinContext().Authentication.User.Identity.GetUserId());
                 userManager.ChangePassword(user.Id, cp.OldPassword, cp.NewPassword);
 
-                updatePassword(cp, user.UserName); // update the user's password in NewsDB
+                updatePassword(user); // update the user's password in NewsDB
                 return Ok();
             }
             catch (Exception ex)
@@ -191,7 +204,7 @@ namespace Newsify.UserApi.Controllers
                 var user = userManager.FindById(Request.GetOwinContext().Authentication.User.Identity.GetUserId());
                 userManager.ChangePassword(user.Id, cp.OldPassword, cp.NewPassword);
 
-                updatePassword(cp, user.UserName); // update the user's password in NewsDB
+                updatePassword(user); // update the user's password in NewsDB
 
                 return Ok();
             }
@@ -233,15 +246,15 @@ namespace Newsify.UserApi.Controllers
             }
         }
 
-        public void updatePassword(ChangePassword cp, string userName)
+        private void updatePassword(IdentityUser iUser)
         {
             try
             {
                 // Change the user's password in NewsDB database
                 using (NewsDBEntities newsDB = new NewsDBEntities())
                 {
-                    var user = newsDB.Users.FirstOrDefault(u => u.UserName == userName);
-                    user.Password = cp.NewPassword;
+                    var user = newsDB.Users.FirstOrDefault(u => u.UserName == iUser.UserName);
+                    user.Password = iUser.PasswordHash;
                     newsDB.SaveChanges();
                 }
             }
