@@ -132,6 +132,30 @@ namespace Newsify.DataApi.Classes
                 return null;
             }
         }
+
+        // Map DAL.Article object to WebArticle object
+        public static WebArticle MapArticle(DAL.Article article)
+        {
+            try
+            {
+                if (article == null)
+                    return null;
+
+                WebArticle art = new WebArticle()
+                {
+                    Title = article.Title,
+                    Description = article.Description,
+                    Url = article.Url,
+                    UrlToImage = article.UrlToImage
+                };
+                return art;
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return null;
+            }
+        }
         #endregion Article Mapper
     }
 }
