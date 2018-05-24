@@ -23,26 +23,15 @@ namespace Newsify.UserApi.Models
         public string Password { get; set; }
     }
 
-    // This model will contain the new user's information needed to create a new user
-    //public class Users : IdentityUser
-    //{
-    //    [Required]
-    //    public override string UserName { get; set; }
-
-    //    [Required]
-    //    [DataType(DataType.Password)]
-    //    public string Password { get; set; }
-
-    //    [Required]
-    //    public string FirstName { get; set; }
-
-    //    [Required]
-    //    public string LastName { get; set; }
-
-    //    [Required]
-    //    [DataType(DataType.DateTime)]
-    //    public DateTime Birthdate { get; set; }
-    //}
+    // This model will be used to create a new user
+    public class Account
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastNmae { get; set; }
+        public DateTime BirthDate { get; set; }
+    }
 
     // This model will be used to change the user's password
     public class ChangePassword
