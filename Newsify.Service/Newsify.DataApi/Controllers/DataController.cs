@@ -149,7 +149,7 @@ namespace Newsify.DataApi.Controllers
 
         #region Articles
         [HttpPost]
-        [Route("~/api/Data/GetArticlesBySourceName")]
+        [Route("Data/GetArticlesBySourceName")]
         public IHttpActionResult GetArticles(ArticleSource source)
         {
             try
@@ -192,7 +192,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Data/GetArticlesByCountry")]
+        [Route("Data/GetArticlesByCountry")]
         public IHttpActionResult GetArticles(ArticleCountry country)
         {
             try
@@ -235,7 +235,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Data/GetArticlesByLanguage")]
+        [Route("Data/GetArticlesByLanguage")]
         public IHttpActionResult GetArticles(ArticleLanguage language)
         {
             try
@@ -278,7 +278,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Data/GetArticlesByTopic")]
+        [Route("Data/GetArticlesByTopic")]
         public IHttpActionResult GetArticles(ArticleTopic topic)
         {
             try
@@ -313,7 +313,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Data/GetArticlesByTitle")]
+        [Route("Data/GetArticlesByTitle")]
         public IHttpActionResult GetArticles(ArticleTitle title)
         {
             try
@@ -348,7 +348,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Data/GetArticlesByPublishedDate")]
+        [Route("Data/GetArticlesByPublishedDate")]
         public IHttpActionResult GetArticles(ArticlePulished pulished)
         {
             try
