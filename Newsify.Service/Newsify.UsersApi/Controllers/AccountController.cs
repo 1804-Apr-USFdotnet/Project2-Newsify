@@ -104,11 +104,10 @@ namespace Newsify.UserApi.Controllers
                 var u = new DAL.User()
                 {
                     UserName = newUser.UserName,
-                    Password = user.PasswordHash,
+                    Password = "",
                     FirstName = newUser.FirstName,
                     LastName = newUser.LastName,
                     BirthDate = newUser.BirthDate,
-                    Active = true
                 };
                 newsDB.Users.Add(u);
                 newsDB.SaveChanges();
@@ -152,11 +151,10 @@ namespace Newsify.UserApi.Controllers
                     var u = new DAL.User()
                     {
                         UserName = newAdmin.UserName,
-                        Password = user.PasswordHash,
+                        Password = "",
                         FirstName = newAdmin.FirstName,
                         LastName = newAdmin.LastName,
                         BirthDate = newAdmin.BirthDate,
-                        Active = true
                     };
                     newsDB.Users.Add(u);
                     newsDB.SaveChanges();
