@@ -18,9 +18,9 @@ namespace Newsify.UserApi.Controllers
         // for testing ]
 
 
-            [HttpGet]
-            [Route("~/api/Account/get")]
-            public IHttpActionResult get()
+        [HttpGet]
+        [Route("~/api/Account/get")]
+        public IHttpActionResult get()
         {
             return Ok("hi");
         }
@@ -230,7 +230,7 @@ namespace Newsify.UserApi.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin, user")]
+        [Authorize(Roles = ("admin, user"))]
         [Route("~/api/Account/UpdateProfile")]
         public IHttpActionResult UpdateProfile(Models.UpdateUserProfile profile)
         {
