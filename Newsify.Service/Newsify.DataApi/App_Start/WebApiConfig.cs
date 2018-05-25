@@ -16,7 +16,7 @@ namespace Newsify.DataApi
 
             config.Routes.MapHttpRoute(
                 name: "DataApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{controller}/{id}/",
                 defaults: new { id = RouteParameter.Optional }
             );
         }
