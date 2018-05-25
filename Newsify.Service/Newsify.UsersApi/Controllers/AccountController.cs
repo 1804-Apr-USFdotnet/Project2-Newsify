@@ -106,7 +106,7 @@ namespace Newsify.UserApi.Controllers
                     UserName = newUser.UserName,
                     Password = user.PasswordHash,
                     FirstName = newUser.FirstName,
-                    LastName = newUser.LastNmae,
+                    LastName = newUser.LastName,
                     BirthDate = newUser.BirthDate,
                     Active = true
                 };
@@ -154,7 +154,7 @@ namespace Newsify.UserApi.Controllers
                         UserName = newAdmin.UserName,
                         Password = user.PasswordHash,
                         FirstName = newAdmin.FirstName,
-                        LastName = newAdmin.LastNmae,
+                        LastName = newAdmin.LastName,
                         BirthDate = newAdmin.BirthDate,
                         Active = true
                     };
