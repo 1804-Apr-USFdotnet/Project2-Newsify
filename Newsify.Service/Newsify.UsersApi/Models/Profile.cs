@@ -26,10 +26,15 @@ namespace Newsify.UserApi.Models
     // This model will be used to create a new user
     public class Account
     {
+        [Required]
         public string UserName { get; set; }
+        [Required]
         public string Password { get; set; }
+        [Required]
         public string FirstName { get; set; }
-        public string LastNmae { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        [Required]
         public DateTime BirthDate { get; set; }
     }
 
