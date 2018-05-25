@@ -15,7 +15,15 @@ namespace Newsify.UserApi.Controllers
 {
     public class AccountController : ApiController
     {
+        // for testing ]
 
+
+            [HttpGet]
+            [Route("api/Account/get")]
+            public IHttpActionResult get()
+        {
+            return Ok("hi");
+        }
         #region Authentication
 
         private static Logger logger = LogManager.GetCurrentClassLogger();
