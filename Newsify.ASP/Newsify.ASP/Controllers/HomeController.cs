@@ -9,6 +9,7 @@ using Newsify.ASP.Models;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Formatting;
+using System.Net;
 
 namespace Newsify.ASP.Controllers
 {
@@ -87,6 +88,37 @@ namespace Newsify.ASP.Controllers
             }
         }
 
+        // GET: Log the user out
+        public async Task<ActionResult> Logout()
+        {
+            try
+            {
+                HttpRequestMessage requestMessage = CreateRequestToService(HttpMethod.Post, "api/Account/Logoff");
+
+                HttpResponseMessage apiResponse;
+                try
+                {
+                    apiResponse = await client.SendAsync(requestMessage);
+                }
+                catch (Exception ex)
+                {
+                    return View("Index");
+                }
+
+                PassCookiesToClient(apiResponse);
+
+                Session["UserName"] = null; // Remove the user from the session memory
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return RedirectToAction("Index");
+            }
+        }
+
+        // Log the user in
         [HttpPost]
         public async Task<ActionResult> Login(LogIn user)
         {
@@ -115,6 +147,8 @@ namespace Newsify.ASP.Controllers
                 }
 
                 PassCookiesToClient(apiResponse);
+                var content = await apiResponse.Content.ReadAsStringAsync();
+                Session["UserName"] = content;
 
                 return RedirectToAction("Index");
             }
