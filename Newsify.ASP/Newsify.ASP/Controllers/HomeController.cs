@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Formatting;
 using System.Net;
+using NLog;
 
 namespace Newsify.ASP.Controllers
 {
@@ -18,6 +19,7 @@ namespace Newsify.ASP.Controllers
         private static readonly HttpClient client = new HttpClient(new HttpClientHandler() { UseCookies = false });
         private static readonly Uri serviceUri = new Uri("http://localhost:3272/");
         private static readonly string cookieName = "ApplicationCookie";
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         Headlines top = new Headlines();
 
@@ -41,7 +43,7 @@ namespace Newsify.ASP.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "About view failed: " + ex.Message);
                 return RedirectToAction("Index"); // Go back to the Home Page
             }
         }
@@ -55,7 +57,7 @@ namespace Newsify.ASP.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Contact view failed: " + ex.Message);
                 return RedirectToAction("Index"); // Go back to the Home Page
             }
         }
@@ -69,7 +71,7 @@ namespace Newsify.ASP.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Login view failed: " + ex.Message);
                 return RedirectToAction("Index"); // Go back to the Home Page
             }
         }
@@ -83,7 +85,7 @@ namespace Newsify.ASP.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Register view failed: " + ex.Message);
                 return RedirectToAction("Index"); // Go back to the home page
             }
         }
@@ -138,6 +140,7 @@ namespace Newsify.ASP.Controllers
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex, "Exception thrown by Login: " + ex.Message);
                     return View("Index");
                 }
 
@@ -154,7 +157,7 @@ namespace Newsify.ASP.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Some other Login error occurred: " + ex.Message);
                 return RedirectToAction("Index"); // Go back to the Home Page
             }
         }
@@ -177,6 +180,7 @@ namespace Newsify.ASP.Controllers
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex, "Register failed on client.SendAsync: " + ex.Message);
                     return View("Index");
                 }
 
@@ -189,7 +193,7 @@ namespace Newsify.ASP.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Register view failed: " + ex.Message);
                 return RedirectToAction("Index");
             }
         }

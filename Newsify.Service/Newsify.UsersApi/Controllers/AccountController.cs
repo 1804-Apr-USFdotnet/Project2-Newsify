@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,12 +9,16 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Newsify.DAL;
 using Newsify.UserApi.Models;
+using NLog;
 
 namespace Newsify.UserApi.Controllers
 {
     public class AccountController : ApiController
     {
+
         #region Authentication
+
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         [HttpPost]
         [Route("~/api/Account/Login")]
@@ -40,6 +43,7 @@ namespace Newsify.UserApi.Controllers
                     authManager.SignIn(new AuthenticationProperties { IsPersistent = true }, claimsIdentity);
                     return Ok(dbUser.UserName);
                 }
+                logger.Info("Invalid password for user " + dbUser.UserName + ", returned Unauthorized.");
                 return Unauthorized();
             }
             return BadRequest("User Model isn't valid.");
@@ -57,7 +61,7 @@ namespace Newsify.UserApi.Controllers
             }
             catch (Exception ex)
             {
-                // log the error here
+                logger.Error(ex, Request.GetOwinContext().Authentication.User.Identity.GetUserName() + " attempted to log off and threw an exception:" + ex.Message);
                 return BadRequest("something went wrong.");
             }
         }
@@ -101,6 +105,8 @@ namespace Newsify.UserApi.Controllers
                 newsDB.Users.Add(u);
                 newsDB.SaveChanges();
             }
+
+            logger.Info(newUser.UserName + " was created.");
             return Ok();
         }
 
@@ -147,11 +153,13 @@ namespace Newsify.UserApi.Controllers
                     newsDB.Users.Add(u);
                     newsDB.SaveChanges();
                 }
+
+                logger.Info(newAdmin.UserName + " was created as a new admin.");
                 return Ok();
             }
             catch (Exception ex)
             {
-                // Log the error here
+                logger.Error(ex, "Admin creation threw an exception: " + ex.Message);
                 return BadRequest("Something went wrong");
             }
         }
@@ -180,7 +188,7 @@ namespace Newsify.UserApi.Controllers
             }
             catch (Exception ex)
             {
-                // Log the error here
+                logger.Error(ex, "A user attempted to change their password and it threw an exception: " + ex.Message);
                 return BadRequest("Something went worng while changing the password");
             }
         }
@@ -210,7 +218,7 @@ namespace Newsify.UserApi.Controllers
             }
             catch (Exception ex)
             {
-                // Log the error here
+                logger.Error(ex, "An admin attempted to change their password and it threw an exception: " + ex.Message);
                 return BadRequest("Something went worng while changing the password");
             }
         }
@@ -241,7 +249,7 @@ namespace Newsify.UserApi.Controllers
             }
             catch (Exception ex)
             {
-                // log the error here
+                logger.Error(ex, "A user or admin attempted to change their profile and it threw an exception: " + ex.Message);
                 return BadRequest("Something went wrong while updating the profile information.");
             }
         }
@@ -260,7 +268,8 @@ namespace Newsify.UserApi.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;// log error here
+                logger.Error(ex, "An exception was thrown inside of the updatePassword function: " + ex.Message);
+                throw ex;
             }
         }
         #endregion

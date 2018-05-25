@@ -1,0 +1,32 @@
+<div>Articles</div>
+<div *ngFor="let art of articles">
+  <table class="table table-hover table-dark">
+    <tr>
+      <td>
+        <a href="{{art.url}}">
+          <img src="{{art.urlToImage}}" style="width:400px;height:300px;" />
+        </a>
+      </td>
+    </tr>
+  </table>
+  <table align="center">
+    <tr>
+      <td>
+        <h4>
+          <strong>{{art.title}}</strong>
+        </h4>
+      </td>
+    </tr>
+  </table>
+  <table align="center">
+    <tr>
+      <td style="width: 600px; text-align: center">
+        {{art.description}}
+      </td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div *ngIf="!articles">
+  <h4>No Articles</h4>
+</div>

@@ -15,6 +15,7 @@ namespace Newsify.DataApi.Controllers
 {
     public class DataController : ApiController
     {
+        private static Logger logger = NLog.LogManager.GetCurrentClassLogger();
         #region Comments
         [HttpPost]
         [Authorize(Roles = "admin, user")]
@@ -33,7 +34,8 @@ namespace Newsify.DataApi.Controllers
                 {
                     var da = new DataAccess();
                     da.AddComment(rc, comment.Author, comment.ArticleId);
-
+                    logger.Info("Added comment " + comment.CommentId + " from author " + comment.Author +
+                                    " on article " + comment.ArticleId);
                     return Ok();
                 }
                 else
@@ -43,7 +45,7 @@ namespace Newsify.DataApi.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Attempt to add comment by author " + comment.Author + "on article " + comment.ArticleId + " failed: " + ex.Message);
                 return BadRequest("Something went wrong while saving comment.");
             }
         }
@@ -61,7 +63,7 @@ namespace Newsify.DataApi.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Attempt to get comments from article " + articleId + " failed: " + ex.Message);
                 return BadRequest("Something went wrong processing the request.");
             }
         }
@@ -92,7 +94,7 @@ namespace Newsify.DataApi.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Attempt to get comment " + gc.CommentId + " failed: " + ex.Message);
                 return BadRequest("Something went wrong processing the request.");
             }
         }
@@ -112,12 +114,15 @@ namespace Newsify.DataApi.Controllers
                 DataAccess da = new DataAccess();
 
                 if (da.UpdateComment(Mapper.MapComment(uc)))
+                {
+                    logger.Info("Comment " + uc.CommentId + " was updated.");
                     return Ok();
+                }
                 return BadRequest("Failed to update the comment.");
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Attempt to update comment " + uc.CommentId + " failed: " + ex.Message);
                 return BadRequest("Something went wrong processing the request.");
             }
         }
@@ -131,11 +136,12 @@ namespace Newsify.DataApi.Controllers
             {
                 DataAccess da = new DataAccess();
                 da.DeleteComment(commentId);
+                logger.Info("Comment " + commentId + " successfully deleted.");
                 return Ok();
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Attempt to delete comment " + commentId + " failed: " + ex.Message);
                 return Unauthorized();
             }
         }
@@ -180,7 +186,7 @@ namespace Newsify.DataApi.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Attempt to get articles from source " + source.Name + " failed: " + ex.Message);
                 return BadRequest("Something went wrong while saving comment.");
             }
         }
@@ -223,7 +229,7 @@ namespace Newsify.DataApi.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Attempt to get articles from country " + country.Country + " failed: " + ex.Message);
                 return BadRequest("Something went wrong while saving comment.");
             }
         }
@@ -266,7 +272,7 @@ namespace Newsify.DataApi.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Attempt to get articles from language " + language.Language + " failed: " + ex.Message);
                 return BadRequest("Something went wrong while saving comment.");
             }
         }
@@ -301,7 +307,7 @@ namespace Newsify.DataApi.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Attempt to get articles from topic " + topic.Topic + " failed: " + ex.Message);
                 return BadRequest("Something went wrong while saving comment.");
             }
         }
@@ -336,7 +342,7 @@ namespace Newsify.DataApi.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Attempt to get articles from title " + title.Title + " failed: " + ex.Message);
                 return BadRequest("Something went wrong while saving comment.");
             }
         }
@@ -371,7 +377,7 @@ namespace Newsify.DataApi.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Attempt to get articles from published date " + pulished.PublishedDate + " failed: " + ex.Message);
                 return BadRequest("Something went wrong while saving comment.");
             }
         }
