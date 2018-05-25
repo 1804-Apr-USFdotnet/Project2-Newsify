@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{358CCF46-7C90-495C-80A5-44D490F21572}</ProjectGuid>
+    <ProjectGuid>{F4BE77DE-7502-47E1-BE62-6AE2289ECBD9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Newsify.DAL</RootNamespace>
@@ -36,14 +36,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.5.4\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.5.5\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -86,6 +80,7 @@
     <Compile Include="Post.cs">
       <DependentUpon>NewsDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositoy\ArticleRepo.cs" />
     <Compile Include="Repositoy\CommentRepo.cs" />
     <Compile Include="Repositoy\IArticleRepo.cs" />
@@ -96,7 +91,6 @@
     <Compile Include="Repositoy\IUnitOfWork.cs" />
     <Compile Include="Repositoy\IUserRepo.cs" />
     <Compile Include="Repositoy\PostRepo.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositoy\Repository.cs" />
     <Compile Include="Repositoy\SourceRepo.cs" />
     <Compile Include="Repositoy\UnitOfWork.cs" />
@@ -123,13 +117,19 @@
       <LastGenOutput>NewsDB.cs</LastGenOutput>
     </Content>
     <None Include="App.config" />
-    <Content Include="connectionString.config" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="connectionString.config" />
     <EntityDeploy Include="NewsDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>NewsDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="NewsDB.edmx.diagram">
       <DependentUpon>NewsDB.edmx</DependentUpon>
+    </None>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

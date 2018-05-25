@@ -19,6 +19,7 @@ namespace Newsify.DataApi.Controllers
         #region Comments
         [HttpPost]
         [Authorize(Roles = ("admin, user"))]
+        [Route("~/api/Data/Add")]
         public IHttpActionResult Comments(WebComment comment)
         {
             try
@@ -50,6 +51,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpGet]
+        [Route("~/api/Data/Comments")]
         public IHttpActionResult Comments(int articleId)
         {
             try
@@ -67,6 +69,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
+        [Route("~/api/Data/Comments")]
         public IHttpActionResult Comments(GetComment gc)
         {
             try
@@ -98,6 +101,7 @@ namespace Newsify.DataApi.Controllers
 
         [HttpPut]
         [Authorize(Roles = ("admin, user"))]
+        [Route("~/api/Data/Comments")]
         public IHttpActionResult Comments(UpdateComment uc)
         {
             try
@@ -125,6 +129,7 @@ namespace Newsify.DataApi.Controllers
 
         [HttpDelete]
         [Authorize(Roles = ("admin, user"))]
+        [Route("~/api/Data/Comments")]
         public IHttpActionResult Commments(int commentId)
         {
             try
@@ -144,6 +149,7 @@ namespace Newsify.DataApi.Controllers
 
         #region Articles
         [HttpPost]
+        [Route("~/api/Data/Source")]
         public IHttpActionResult Articles(ArticleSource source)
         {
             try
@@ -186,6 +192,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
+        [Route("~/api/Data/Country")]
         public IHttpActionResult Articles(ArticleCountry country)
         {
             try
@@ -228,6 +235,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
+        [Route("~/api/Data/Language")]
         public IHttpActionResult Articles(ArticleLanguage language)
         {
             try
@@ -270,6 +278,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
+        [Route("~/api/Data/Topic")]
         public IHttpActionResult Articles(ArticleTopic topic)
         {
             try
@@ -304,6 +313,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
+        [Route("~/api/Data/Title")]
         public IHttpActionResult Articles(ArticleTitle title)
         {
             try
@@ -338,6 +348,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
+        [Route("~/api/Data/Date")]
         public IHttpActionResult Articles(ArticlePulished pulished)
         {
             try
