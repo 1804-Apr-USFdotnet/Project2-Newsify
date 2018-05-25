@@ -19,7 +19,7 @@ namespace Newsify.UserApi.Controllers
 
 
             [HttpGet]
-            [Route("api/Account/get")]
+            [Route("~/api/Account/get")]
             public IHttpActionResult get()
         {
             return Ok("hi");
@@ -29,7 +29,7 @@ namespace Newsify.UserApi.Controllers
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         [HttpPost]
-        [Route("api/Account/Login")]
+        [Route("~/api/Account/Login")]
         public IHttpActionResult Login(Models.User user)
         {
             if (ModelState.IsValid)
@@ -58,7 +58,7 @@ namespace Newsify.UserApi.Controllers
         }
 
         [HttpPost]
-        [Route("api/Account/Logoff")]
+        [Route("~/api/Account/Logoff")]
         public IHttpActionResult Logoff()
         {
             try
@@ -75,7 +75,7 @@ namespace Newsify.UserApi.Controllers
         }
 
         [HttpPost]
-        [Route("api/Account/Register")]
+        [Route("~/api/Account/Register")]
         public IHttpActionResult Register(Account newUser)
         {
             if (!ModelState.IsValid)
@@ -120,7 +120,7 @@ namespace Newsify.UserApi.Controllers
 
         [HttpPost]
         [Authorize(Roles = "admin")]
-        [Route("api/Account/RegisterAdmin")]
+        [Route("~/api/Account/RegisterAdmin")]
         public IHttpActionResult RegisterAdmin(Account newAdmin)
         {
             try
@@ -174,7 +174,7 @@ namespace Newsify.UserApi.Controllers
 
         [HttpPost]
         [Authorize(Roles = "user")]
-        [Route("api/Account/ChangePassword")]
+        [Route("~/api/Account/ChangePassword")]
         public IHttpActionResult ChangeUserPassword(Models.ChangePassword cp)
         {
             try
@@ -203,7 +203,7 @@ namespace Newsify.UserApi.Controllers
 
         [HttpPost]
         [Authorize(Roles = "admin")]
-        [Route("api/Account/ChangeAdminPassword")]
+        [Route("~/api/Account/ChangeAdminPassword")]
         public IHttpActionResult ChangeAdminPassword(Models.ChangePassword cp)
         {
             try
@@ -233,7 +233,7 @@ namespace Newsify.UserApi.Controllers
 
         [HttpPost]
         [Authorize(Roles = "admin, user")]
-        [Route("api/Account/UpdateProfile")]
+        [Route("~/api/Account/UpdateProfile")]
         public IHttpActionResult UpdateProfile(Models.UpdateUserProfile profile)
         {
             try
