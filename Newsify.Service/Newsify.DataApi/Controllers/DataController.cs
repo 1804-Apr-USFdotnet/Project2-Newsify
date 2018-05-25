@@ -19,7 +19,7 @@ namespace Newsify.DataApi.Controllers
         #region Comments
         [HttpPost]
         [Authorize(Roles = ("admin, user"))]
-        [Route("~/api/Data/AddComment")]
+        [Route("Data/AddComment")]
         public IHttpActionResult AddComment(WebComment comment)
         {
             try
@@ -51,7 +51,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpGet]
-        [Route("~/api/Data/GetComments")]
+        [Route("Data/GetComments")]
         public IHttpActionResult GetComments(int articleId)
         {
             try
@@ -69,7 +69,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Data/GetComment")]
+        [Route("Data/GetComment")]
         public IHttpActionResult GetComment(GetComment gc)
         {
             try
@@ -101,7 +101,7 @@ namespace Newsify.DataApi.Controllers
 
         [HttpPut]
         [Authorize(Roles = ("admin, user"))]
-        [Route("~/api/Data/UpdateComment")]
+        [Route("Data/UpdateComment")]
         public IHttpActionResult UpdateComment(UpdateComment uc)
         {
             try
@@ -129,7 +129,7 @@ namespace Newsify.DataApi.Controllers
 
         [HttpDelete]
         [Authorize(Roles = ("admin, user"))]
-        [Route("~/api/Data/DeleteComment")]
+        [Route("Data/DeleteComment")]
         public IHttpActionResult DeleteCommment(int commentId)
         {
             try
