@@ -53,7 +53,7 @@ namespace Newsify.UserApi.Controllers
             {
                 Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
 
-                return Ok();
+                return Ok(Request.GetOwinContext().Authentication.User.Identity.GetUserName());
             }
             catch (Exception ex)
             {
