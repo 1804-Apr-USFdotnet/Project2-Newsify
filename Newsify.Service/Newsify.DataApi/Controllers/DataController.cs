@@ -19,8 +19,7 @@ namespace Newsify.DataApi.Controllers
         #region Comments
         [HttpPost]
         [Authorize(Roles = ("admin, user"))]
-        [Route("~/api/Data/AddComment")]
-        public IHttpActionResult AddComment(WebComment comment)
+        public IHttpActionResult Comments(WebComment comment)
         {
             try
             {
@@ -51,8 +50,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpGet]
-        [Route("~/api/Data/GetComments")]
-        public IHttpActionResult GetComments(int articleId)
+        public IHttpActionResult Comments(int articleId)
         {
             try
             {
@@ -69,8 +67,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Data/GetComment")]
-        public IHttpActionResult GetComment(GetComment gc)
+        public IHttpActionResult Comments(GetComment gc)
         {
             try
             {
@@ -101,8 +98,7 @@ namespace Newsify.DataApi.Controllers
 
         [HttpPut]
         [Authorize(Roles = ("admin, user"))]
-        [Route("~/api/Data/UpdateComment")]
-        public IHttpActionResult UpdateComment(UpdateComment uc)
+        public IHttpActionResult Comments(UpdateComment uc)
         {
             try
             {
@@ -129,8 +125,7 @@ namespace Newsify.DataApi.Controllers
 
         [HttpDelete]
         [Authorize(Roles = ("admin, user"))]
-        [Route("~/api/Data/DeleteComment")]
-        public IHttpActionResult DeleteCommment(int commentId)
+        public IHttpActionResult Commments(int commentId)
         {
             try
             {
@@ -149,8 +144,7 @@ namespace Newsify.DataApi.Controllers
 
         #region Articles
         [HttpPost]
-        [Route("~/api/Data/GetArticlesBySourceName")]
-        public IHttpActionResult GetArticles(ArticleSource source)
+        public IHttpActionResult Articles(ArticleSource source)
         {
             try
             {
@@ -192,8 +186,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Data/GetArticlesByCountry")]
-        public IHttpActionResult GetArticles(ArticleCountry country)
+        public IHttpActionResult Articles(ArticleCountry country)
         {
             try
             {
@@ -235,8 +228,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Data/GetArticlesByLanguage")]
-        public IHttpActionResult GetArticles(ArticleLanguage language)
+        public IHttpActionResult Articles(ArticleLanguage language)
         {
             try
             {
@@ -278,8 +270,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Data/GetArticlesByTopic")]
-        public IHttpActionResult GetArticles(ArticleTopic topic)
+        public IHttpActionResult Articles(ArticleTopic topic)
         {
             try
             {
@@ -313,8 +304,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Data/GetArticlesByTitle")]
-        public IHttpActionResult GetArticles(ArticleTitle title)
+        public IHttpActionResult Articles(ArticleTitle title)
         {
             try
             {
@@ -348,8 +338,7 @@ namespace Newsify.DataApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Data/GetArticlesByPublishedDate")]
-        public IHttpActionResult GetArticles(ArticlePulished pulished)
+        public IHttpActionResult Articles(ArticlePulished pulished)
         {
             try
             {
