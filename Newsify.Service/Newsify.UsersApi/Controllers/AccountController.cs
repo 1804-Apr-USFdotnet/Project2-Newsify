@@ -38,7 +38,7 @@ namespace Newsify.UserApi.Controllers
                     var claimsIdentity = userManager.CreateIdentity(dbUser, "ApplicationCookie");
 
                     authManager.SignIn(new AuthenticationProperties { IsPersistent = true }, claimsIdentity);
-                    return Ok();
+                    return Ok(dbUser.UserName);
                 }
                 return Unauthorized();
             }
