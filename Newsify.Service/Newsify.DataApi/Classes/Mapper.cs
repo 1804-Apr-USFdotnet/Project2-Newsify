@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using Newsify.DAL;
 using Newsify.DataApi.Models;
+using NLog;
 
 namespace Newsify.DataApi.Classes
 {
     public static class Mapper
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         #region Comment Mapper
         // Map the WebComment to DAL.Comment
         public static Comment MapComment(WebComment wc)
@@ -28,7 +27,7 @@ namespace Newsify.DataApi.Classes
             }
             catch (Exception ex)
             {
-                // log error here
+                logger.Error(ex, "Attempt to map webcomment to comment failed: " + ex.Message);
                 return null; // return nothing to the caller
             }
         }
@@ -49,7 +48,7 @@ namespace Newsify.DataApi.Classes
             }
             catch (Exception ex)
             {
-                // log error here
+                logger.Error(ex, "Attempt to map comment to webcomment failed: " + ex.Message);
                 return null; // return nothing to the caller
             }
         }
@@ -65,11 +64,12 @@ namespace Newsify.DataApi.Classes
                     Modified = uc.Modified,
                     ID = uc.CommentId
                 };
+                logger.Info("Comment " + uc.CommentId + " updated succesfully.");
                 return c;
             }
             catch (Exception ex)
             {
-                // log error here
+                logger.Error(ex, "Attempt to update comment " + uc.CommentId + " failed: " + ex.Message);
                 return null; // return nothing to the caller
             }
         }
@@ -90,7 +90,7 @@ namespace Newsify.DataApi.Classes
             }
             catch (Exception ex)
             {
-                // log error here
+                logger.Error(ex, "Attempt to map ArticleSource " + source.Name + " to Source failed: " + ex.Message);
                 return null;
             }
         }
@@ -109,7 +109,7 @@ namespace Newsify.DataApi.Classes
             }
             catch (Exception ex)
             {
-                // log error here
+                logger.Error(ex, "Attempt to map ArticleCountry " + country.Country + " to Source failed: " + ex.Message);
                 return null;
             }
         }
@@ -128,7 +128,7 @@ namespace Newsify.DataApi.Classes
             }
             catch (Exception ex)
             {
-                // log error here
+                logger.Error(ex, "Attempt to map ArticleLanguage " + lang.Language + " to Source failed: " + ex.Message);
                 return null;
             }
         }
@@ -152,7 +152,7 @@ namespace Newsify.DataApi.Classes
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Attempt to map DAL.Article " + article.ID + " to WebArticle failed: " + ex.Message);
                 return null;
             }
         }
@@ -177,7 +177,7 @@ namespace Newsify.DataApi.Classes
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Attempt to map DAL.Article list WebArticle list failed: " + ex.Message);
                 return null;
             }
         }

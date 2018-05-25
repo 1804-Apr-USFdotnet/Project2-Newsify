@@ -66,26 +66,26 @@ namespace Newsify.DAL.Tests
             }
         }
 
-        [Fact]
-        public void DeleteUser_DeletesUser_UserActiveIsFalse()
-        {
-            List<User> UserList = new List<User>() { new User() { ID = 100000, UserName = "b", Active = true },
-                new User() { ID = 200000, UserName = "a", Active = true },
-                new User() { ID =300000, UserName = "c", Active = true } };
+        //[Fact]
+        //public void DeleteUser_DeletesUser_UserActiveIsFalse()
+        //{
+        //    List<User> UserList = new List<User>() { new User() { ID = 100000, UserName = "b", Active = true },
+        //        new User() { ID = 200000, UserName = "a", Active = true },
+        //        new User() { ID =300000, UserName = "c", Active = true } };
 
-            UserRepo repository = new UserRepo(new NewsDBEntities());
-            foreach (var item in UserList)
-            {
-                repository.Create(item);
-            }
+        //    UserRepo repository = new UserRepo(new NewsDBEntities());
+        //    foreach (var item in UserList)
+        //    {
+        //        repository.Create(item);
+        //    }
 
-            var expected = new User() { ID = 100000, Active = true };
+        //    var expected = new User() { ID = 100000, Active = true };
 
-            var temp = repository.Delete(expected);
+        //    var temp = repository.Delete(expected);
 
-            Assert.Equal(100000, temp.ID);
-            Assert.False(temp.Active);
-        }
+        //    Assert.Equal(100000, temp.ID);
+        //    Assert.False(temp.Active);
+        //}
         
     }
 }
