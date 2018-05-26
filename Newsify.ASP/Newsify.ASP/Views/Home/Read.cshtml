@@ -1,0 +1,14 @@
+﻿@model Newsify.ASP.Models.Article
+
+@{
+    ViewBag.Title = "Newsify";
+}
+
+<div class="container text-center">
+    <img src="@Model.urlToImage" />
+    <h1 style="text-align: center">@Model.title</h1>
+    <hr />
+    <hr />
+    <h3 style="text-align:center">@Model.description</h3>
+    <div class="container text-center">@Model.mainText</div>
+</div>
