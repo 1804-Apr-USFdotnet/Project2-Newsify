@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { Article } from '../models/article';
 import { ArticlesService } from '../articles.service';
 
@@ -15,18 +17,25 @@ export class ArticlesComponent implements OnInit {
 
   //searchText: string;
   
-  constructor(private arSvc: ArticlesService ) { }
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location, 
+    private arSvc: ArticlesService ) { }
+
+    public type = this.route.snapshot.paramMap.get('id');
+    public input = this.route.snapshot.paramMap.get('input')
+
 
   ngOnInit() {
-    //this.searchArticles();
+    this.searchArticles(this.type, this.input);
     this.arSvc.getArticles((response) => {
     this.articles = response.articles;
     });
   }
-  // searchArticles() {
-  //   this.arSvc.getArticles((response) => {
-  //     this.articles = response.articles;
-  //   });
-  // }
+  searchArticles(type, input) {
+    this.arSvc.getArticlesByTitle(type, input, (response) => {
+      this.articles = response.articles;
+    });
+  }
 
 }
