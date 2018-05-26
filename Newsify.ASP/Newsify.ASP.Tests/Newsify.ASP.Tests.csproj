@@ -100,7 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Newsify.ASP\Newsify.ASP.csproj">
-      <Project>{4E2752BA-9B4C-463F-B5E6-47A6F8CD6458}</Project>
+      <Project>{17e6bb50-0240-48f6-a995-6d5db251702e}</Project>
       <Name>Newsify.ASP</Name>
     </ProjectReference>
   </ItemGroup>
