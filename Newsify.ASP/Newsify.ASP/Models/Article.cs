@@ -1,15 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NewsAPI;
-using NewsAPI.Models;
-using NewsAPI.Constants;
-using System.Threading.Tasks;
-using Newsify.ASP.Classes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Newsify.ASP.Models
 {
@@ -21,13 +13,62 @@ namespace Newsify.ASP.Models
         public Articles() { data = new List<Article>(); }
     }
     public class Article
-        {
-            public string sourceName { get; set; }
-            public string author { get; set; }
-            public string title { get; set; }
-            public string description { get; set; }
-            public string url { get; set; }
-            public string urlToImage { get; set; }
-            public string publishedAT { get; set; }
-        }
+    {
+        public string sourceName { get; set; }
+        public string author { get; set; }
+        public string title { get; set; }
+        public string description { get; set; }
+        public string url { get; set; }
+        public string urlToImage { get; set; }
+        public string publishedAT { get; set; }
+    }
+
+    #region Search Models
+    public class ArticleSource
+    {
+        [Required]
+        [DataType(DataType.Text)]
+        public string Name { get; set; }
+    }
+
+    // Model to search articles based on Title
+    public class ArticleTitle
+    {
+        [Required]
+        [DataType(DataType.Text)]
+        public string Title { get; set; }
+    }
+
+    // Model to search articles based on Title
+    public class ArticleTopic
+    {
+        [Required]
+        [DataType(DataType.Text)]
+        public string Topic { get; set; }
+    }
+
+    // Model to search articles based on Title
+    public class ArticleCountry
+    {
+        [Required]
+        [StringLength(2)]
+        public string Country { get; set; }
+    }
+
+    // Model to search articles based on Title
+    public class ArticleLanguage
+    {
+        [Required]
+        [StringLength(2)]
+        public string Language { get; set; }
+    }
+
+    // Model to search articles based on Title
+    public class ArticlePulished
+    {
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime PublishedDate { get; set; }
+    }
+    #endregion Search Models
 }

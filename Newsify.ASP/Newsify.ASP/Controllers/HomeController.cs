@@ -120,6 +120,33 @@ namespace Newsify.ASP.Controllers
             }
         }
 
+        // Search for articles based on the criteria
+        public ActionResult Search(string search)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    throw new NotSupportedException(); // Invalid search, throw an error
+                }
+
+                // Search for the articles in the database
+                HttpRequestMessage requestMessage = CreateRequestToService(HttpMethod.Post, "");// CreateSearchRequestToService(search);
+                if (requestMessage == null)
+                {
+                    throw new Exception("Failed to create a Search request to send to the DataAPi.");
+                }
+
+                return View("Index");
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                return View("Error");
+            }
+        }
+
         // Log the user in
         [HttpPost]
         public async Task<ActionResult> Login(LogIn user)
@@ -207,6 +234,52 @@ namespace Newsify.ASP.Controllers
             apiRequest.Headers.Add("Cookie", new CookieHeaderValue(cookieName, cookieValue).ToString());
 
             return apiRequest;
+        }
+
+        private HttpRequestMessage CreateSearchRequestToService(Search search)
+        {
+            try
+            {
+                HttpRequestMessage requestMessage = CreateRequestToService(HttpMethod.Post, "api/Data/" + search.Criteria);
+                if (search.Criteria == "Title")
+                {
+                    var at = new ArticleTitle() { Title = search.SearchString };
+                    requestMessage.Content = new ObjectContent<ArticleTitle>(at, new JsonMediaTypeFormatter());
+                }
+                if (search.Criteria == "Topic")
+                {
+                    var at = new ArticleTitle() { Title = search.SearchString };
+                    requestMessage.Content = new ObjectContent<ArticleTitle>(at, new JsonMediaTypeFormatter());
+                }
+                if (search.Criteria == "Source")
+                {
+                    var at = new ArticleTitle() { Title = search.SearchString };
+                    requestMessage.Content = new ObjectContent<ArticleTitle>(at, new JsonMediaTypeFormatter());
+                }
+                if (search.Criteria == "Country")
+                {
+                    var at = new ArticleTitle() { Title = search.SearchString };
+                    requestMessage.Content = new ObjectContent<ArticleTitle>(at, new JsonMediaTypeFormatter());
+                }
+                if (search.Criteria == "Language")
+                {
+                    var at = new ArticleTitle() { Title = search.SearchString };
+                    requestMessage.Content = new ObjectContent<ArticleTitle>(at, new JsonMediaTypeFormatter());
+                }
+                if (search.Criteria == "Title")
+                {
+                    var at = new ArticleTitle() { Title = search.SearchString };
+                    requestMessage.Content = new ObjectContent<ArticleTitle>(at, new JsonMediaTypeFormatter());
+                }
+
+                return requestMessage;
+            }
+            catch (Exception ex)
+            {
+                // log the error here
+                logger.Error(ex.Message);
+                return null;
+            }
         }
 
         private bool PassCookiesToClient(HttpResponseMessage apiResponse)
