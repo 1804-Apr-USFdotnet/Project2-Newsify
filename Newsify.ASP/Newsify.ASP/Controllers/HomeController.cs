@@ -11,6 +11,9 @@ using System.Net.Http.Headers;
 using System.Net.Http.Formatting;
 using System.Net;
 using NLog;
+using Newtonsoft.Json;
+using NReadability;
+using HtmlAgilityPack;
 
 namespace Newsify.ASP.Controllers
 {
@@ -120,8 +123,34 @@ namespace Newsify.ASP.Controllers
             }
         }
 
+        public ActionResult Read(Article article)
+        {
+            try
+            {
+                var t = new NReadabilityWebTranscoder();
+                bool b;
+                string page = t.Transcode(article.url, out b);
+
+                if (b)
+                {
+                    HtmlDocument doc = new HtmlDocument();
+                    doc.LoadHtml(page);
+
+                    var mainText = doc.DocumentNode.SelectSingleNode("//div[@id='readInner']").InnerText;
+                    article.mainText = mainText;
+                }
+
+                return View(article);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                return View("Error");
+            }
+        }
+
         // Search for articles based on the criteria
-        public ActionResult Search(string search)
+        public async Task<ActionResult> Search(Search search)
         {
             try
             {
@@ -131,14 +160,33 @@ namespace Newsify.ASP.Controllers
                 }
 
                 // Search for the articles in the database
-                HttpRequestMessage requestMessage = CreateRequestToService(HttpMethod.Post, "");// CreateSearchRequestToService(search);
+                HttpRequestMessage requestMessage = CreateSearchRequestToService(search);
                 if (requestMessage == null)
                 {
                     throw new Exception("Failed to create a Search request to send to the DataAPi.");
                 }
 
-                return View("Index");
+                HttpResponseMessage apiResponse;
+                try
+                {
+                    apiResponse = await client.SendAsync(requestMessage);
+                    if (!apiResponse.IsSuccessStatusCode)
+                    {
+                        throw new Exception("Request failed with following error: " + apiResponse.StatusCode);
+                    }
 
+                    // get the articles from the response body
+                    var content = await apiResponse.Content.ReadAsStringAsync(); // get the json string from the content
+
+                    var articles = JsonConvert.DeserializeObject<List<Article>>(content);
+
+                    return View(articles);
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex, "Exception thrown by Search: " + ex.Message);
+                    return View("Error");
+                }
             }
             catch (Exception ex)
             {
@@ -246,30 +294,30 @@ namespace Newsify.ASP.Controllers
                     var at = new ArticleTitle() { Title = search.SearchString };
                     requestMessage.Content = new ObjectContent<ArticleTitle>(at, new JsonMediaTypeFormatter());
                 }
-                if (search.Criteria == "Topic")
+                else if (search.Criteria == "Topic")
                 {
-                    var at = new ArticleTitle() { Title = search.SearchString };
-                    requestMessage.Content = new ObjectContent<ArticleTitle>(at, new JsonMediaTypeFormatter());
+                    var at = new ArticleTopic() { Topic = search.SearchString };
+                    requestMessage.Content = new ObjectContent<ArticleTopic>(at, new JsonMediaTypeFormatter());
                 }
-                if (search.Criteria == "Source")
+                else if (search.Criteria == "Source")
                 {
-                    var at = new ArticleTitle() { Title = search.SearchString };
-                    requestMessage.Content = new ObjectContent<ArticleTitle>(at, new JsonMediaTypeFormatter());
+                    var at = new ArticleSource() { Name = search.SearchString };
+                    requestMessage.Content = new ObjectContent<ArticleSource>(at, new JsonMediaTypeFormatter());
                 }
-                if (search.Criteria == "Country")
+                else if (search.Criteria == "Country")
                 {
-                    var at = new ArticleTitle() { Title = search.SearchString };
-                    requestMessage.Content = new ObjectContent<ArticleTitle>(at, new JsonMediaTypeFormatter());
+                    var at = new ArticleCountry() { Country = search.SearchString };
+                    requestMessage.Content = new ObjectContent<ArticleCountry>(at, new JsonMediaTypeFormatter());
                 }
-                if (search.Criteria == "Language")
+                else if (search.Criteria == "Language")
                 {
-                    var at = new ArticleTitle() { Title = search.SearchString };
-                    requestMessage.Content = new ObjectContent<ArticleTitle>(at, new JsonMediaTypeFormatter());
+                    var at = new ArticleLanguage() { Language = search.SearchString };
+                    requestMessage.Content = new ObjectContent<ArticleLanguage>(at, new JsonMediaTypeFormatter());
                 }
-                if (search.Criteria == "Title")
+                else if (search.Criteria == "Date")
                 {
-                    var at = new ArticleTitle() { Title = search.SearchString };
-                    requestMessage.Content = new ObjectContent<ArticleTitle>(at, new JsonMediaTypeFormatter());
+                    var at = new ArticlePulished() { PublishedDate = Convert.ToDateTime(search.SearchString) };
+                    requestMessage.Content = new ObjectContent<ArticlePulished>(at, new JsonMediaTypeFormatter());
                 }
 
                 return requestMessage;

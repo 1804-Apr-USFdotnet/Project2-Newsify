@@ -1,4 +1,7 @@
-﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+﻿@{
+    var searchString = "";
+}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     @Html.ActionLink("Newsify", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -23,14 +26,17 @@
         </ul>
         <form name="SearchForm" class="form-inline my-2 my-lg-0">
             <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
+            <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" onclick="@(searchString = Html.Name("search").ToString())">
+                Search
+            </button>
             <div class="dropdown-menu dropdown-menu-right">
-                @Html.ActionLink("Title", "Search", "Home", new { @class = "dropdown-item" })
-                @Html.ActionLink("Topic", "Search", "Home", null, new { @class = "dropdown-item" })
+                @Html.ActionLink("Title", "Search", "Home", new { SearchString = searchString, Criteria = "Title" }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Topic", "Search", "Home", new { SearchString = "Apple", Criteria = "Topic" }, new { @class = "dropdown-item" })
                 <div role="separator" class="dropdown-divider"></div>
-                @Html.ActionLink("Source", "Search", "Home", null, new { @class = "dropdown-item" })
-                @Html.ActionLink("Country", "Search", "Home", null, new { @class = "dropdown-item" })
-                @Html.ActionLink("Language", "Search", "Home", null, new { @class = "dropdown-item" })
+                @Html.ActionLink("Source", "Search", "Home", new { SearchString = "Hello", Criteria = "Source" }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Country", "Search", "Home", new { SearchString = "Hello", Criteria = "Country" }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Language", "Search", "Home", new { SearchString = "Hello", Criteria = "Language" }, new { @class = "dropdown-item" })
             </div>
         </form>
     </div>

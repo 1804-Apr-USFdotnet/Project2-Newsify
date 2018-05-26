@@ -21,6 +21,7 @@ namespace Newsify.ASP.Models
         public string url { get; set; }
         public string urlToImage { get; set; }
         public string publishedAT { get; set; }
+        public string mainText { get; set; }
     }
 
     #region Search Models

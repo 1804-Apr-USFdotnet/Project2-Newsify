@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Newsify.ASP.Models.Article>
+
+@foreach (var item in Model)
+{
+    <table align="center">
+        <tr>
+            <td>
+                <a href="@Url.Action("Read", item)"><img src="@Html.DisplayFor(modelItem => item.urlToImage)" style="width:400px;height:300px;" /></a>
+            </td>
+        </tr>
+    </table>
+    <table align="center">
+        <tr>
+            <td>
+                <h4><strong>@Html.DisplayFor(modelItem => item.title)</strong></h4>
+            </td>
+        </tr>
+    </table>
+
+    <table align="center">
+        <tr>
+            <td style="width: 600px; text-align: center">
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+        </tr>
+    </table>
+    <hr />
+}
