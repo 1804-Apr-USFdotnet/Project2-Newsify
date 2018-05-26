@@ -9,12 +9,14 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { ArticlesComponent } from './articles/articles.component';
+import { ArticleSearchComponent } from './article-search/article-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationBarComponent,
-    ArticlesComponent
+    ArticlesComponent,
+    ArticleSearchComponent
   ],
   imports: [
     //AppBootstrapModule,
