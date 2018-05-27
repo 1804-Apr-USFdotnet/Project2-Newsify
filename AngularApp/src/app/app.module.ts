@@ -19,13 +19,12 @@ import { ArticleSearchComponent } from './article-search/article-search.componen
     ArticleSearchComponent
   ],
   imports: [
-    //AppBootstrapModule,
     NgbModule.forRoot(),
     BrowserModule,
     FormsModule,
     RouterModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

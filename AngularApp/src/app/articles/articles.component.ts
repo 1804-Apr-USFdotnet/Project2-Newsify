@@ -31,7 +31,6 @@ export class ArticlesComponent implements OnInit {
       console.log(response);
       this.articles = response.articles;
     });
-    //this.searchArticlesApi(this.type, this.input);
   }
   searchArticlesApi(type, input) {
     this.arSvc.getArticlesApi(type, input, (response) => {
@@ -39,10 +38,5 @@ export class ArticlesComponent implements OnInit {
       console.log(response);
     });
   }
-  // searchArticles(type, input) {
-  //   this.arSvc.getArticlesByTitle(type, input, (response) => {
-  //     this.articles = response.articles;
-  //   });
-  // }
 
 }
