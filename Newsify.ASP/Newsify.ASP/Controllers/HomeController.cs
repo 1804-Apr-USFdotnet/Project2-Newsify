@@ -152,7 +152,7 @@ namespace Newsify.ASP.Controllers
         {
             try
             {             
-                var comment = new WebComment() { Author = Session["UserName"].ToString(), ArticleId = articleId};
+                var comment = new WebComment() { Author = Session["UserName"].ToString().Replace("\"", ""), ArticleId = articleId};
                 return View(comment);
             }
             catch (Exception ex)
