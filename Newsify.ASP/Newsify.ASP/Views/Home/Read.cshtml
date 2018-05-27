@@ -16,7 +16,7 @@
 <div class="container">
     @if (Session["UserName"].ToString() != null && Session["UserName"].ToString() != "")
     {
-        @Html.ActionLink("New Comment", "Comment", Model.ID);
+        @Html.ActionLink("New Comment", "Comment", new { articleId = Model.ID } );
     }
 </div>
 

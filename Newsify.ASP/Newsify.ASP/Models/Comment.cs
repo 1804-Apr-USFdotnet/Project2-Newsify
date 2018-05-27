@@ -10,7 +10,6 @@ namespace Newsify.ASP.Models
     {
         [Required]
         public string Comment { get; set; }
-        [Required]
         public string Author { get; set; }
         public DateTime CommentedAt { get; set; }
         public int ArticleId { get; set; }

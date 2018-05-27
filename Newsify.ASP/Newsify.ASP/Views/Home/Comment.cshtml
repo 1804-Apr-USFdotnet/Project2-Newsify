@@ -4,7 +4,7 @@
     ViewBag.Title = "Newsify: Comment";
 }
 
-<h2>Comment</h2>
+<h2>Create Comment</h2>
 
 
 @using (Html.BeginForm()) 
@@ -13,7 +13,7 @@
     
     <div class="form-horizontal">
         <hr />
-        <h4>@Model.Author</h4>
+        <h4>@Model.Author.Replace("\"", "")</h4>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
