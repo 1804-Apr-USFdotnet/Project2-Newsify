@@ -30,12 +30,12 @@
             <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [value]="val" (input)="val = $event.target.value" placeholder="Search">
             <button class="btn btn-outline-success my-2 my-sm-0 dropdown-toggle" type="submit" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" id="byTitle" href="/articles-search/Title/{{val}}">By Title</a>
-                <a class="dropdown-item" id="bySource" href="/articles-search/Source/{{val}}">By Source</a>
-                <a class="dropdown-item" id="byTopic" href="/articles-search/Topic/{{val}}">Topic</a>
-                <a class="dropdown-item" id="byCountry" href="/articles-search/Country/{{val}}">Country</a>
-                <a class="dropdown-item" id="byLanguage" href="/articles-search/Language/{{val}}">Language</a>
-                <a class="dropdown-item" id="byLanguage" href="/articles-search/Date/{{val}}">Date</a>
+                <a class="dropdown-item" id="byTitle" routerLink="/articles-search/Title/{{val}}">By Title</a>
+                <a class="dropdown-item" id="bySource" routerLink="/articles-search/Source/{{val}}">By Source</a>
+                <a class="dropdown-item" id="byTopic" routerLink="/articles-search/Topic/{{val}}">Topic</a>
+                <a class="dropdown-item" id="byCountry" routerLink="/articles-search/Country/{{val}}">Country</a>
+                <a class="dropdown-item" id="byLanguage" routerLink="/articles-search/Language/{{val}}">Language</a>
+                <a class="dropdown-item" id="byLanguage" routerLink="/articles-search/Date/{{val}}">Date</a>
               </div>
           </form>
           </div>

@@ -18,10 +18,12 @@ export class ArticlesService {
     )
   }
   getArticlesApi(type, input, onSuccess) {
+    let dateString = input;
     var host = "http://localhost:3272/"
     if (type === "Title") {
       var url = host + "api/Data/Title";
     } else if (type === "Source") {
+      type = "Name";
       var url = host + "api/Data/Source";
     } else if (type === "Language") {
       var url = host + "api/Data/Language";
@@ -31,9 +33,11 @@ export class ArticlesService {
       var url = host + "api/Data/Topic";
     } else if (type === "Date") {
       var url = host + "api/Data/Date";
+      input = new Date(dateString);
     } else {
       console.log("not a valid type");
     }
+
     var req = this.httpClient.post(url, type + "=" + input,
       { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
     console.log(req)

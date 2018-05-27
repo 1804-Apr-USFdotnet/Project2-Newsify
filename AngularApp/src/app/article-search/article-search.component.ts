@@ -22,8 +22,8 @@ export class ArticleSearchComponent implements OnInit {
     private location: Location,
     private arSvc: ArticlesService) { }
 
-  public type = this.route.snapshot.paramMap.get('id');
-  public input = this.route.snapshot.paramMap.get('input')
+  //public type = this.route.snapshot.paramMap.get('id');
+  //public input = this.route.snapshot.paramMap.get('input')
 
 
   ngOnInit() {
@@ -31,7 +31,12 @@ export class ArticleSearchComponent implements OnInit {
     //   console.log(response);
     // this.articles = response.articles;
     // });
-    this.searchArticlesApi(this.type, this.input);
+    this.route.params.subscribe(params => {
+      let type = params['id']
+      let input = params['input'];
+      this.searchArticlesApi(type, input);
+    })
+    //this.searchArticlesApi(this.type, this.input);
   }
   searchArticlesApi(type, input) {
     this.arSvc.getArticlesApi(type, input, (response) => {
