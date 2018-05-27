@@ -15,8 +15,6 @@ export class ArticleSearchComponent implements OnInit {
 
   ]
 
-  //searchText: string;
-
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -27,16 +25,11 @@ export class ArticleSearchComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.arSvc.getArticles((response) => {
-    //   console.log(response);
-    // this.articles = response.articles;
-    // });
     this.route.params.subscribe(params => {
       let type = params['id']
       let input = params['input'];
       this.searchArticlesApi(type, input);
     })
-    //this.searchArticlesApi(this.type, this.input);
   }
   searchArticlesApi(type, input) {
     this.arSvc.getArticlesApi(type, input, (response) => {
@@ -44,10 +37,5 @@ export class ArticleSearchComponent implements OnInit {
       console.log(response);
     });
   }
-  // searchArticles(type, input) {
-  //   this.arSvc.getArticlesByTitle(type, input, (response) => {
-  //     this.articles = response.articles;
-  //   });
-  // }
 
 }
