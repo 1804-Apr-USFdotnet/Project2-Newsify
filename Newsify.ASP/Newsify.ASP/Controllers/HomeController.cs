@@ -148,11 +148,11 @@ namespace Newsify.ASP.Controllers
         }
 
         // Get: Change to New Comment View
-        public ActionResult Comment(Article article)
+        public ActionResult Comment(int articleId)
         {
             try
             {             
-                var comment = new WebComment() { Author = Session["UserName"].ToString(), ArticleId = article.ID};
+                var comment = new WebComment() { Author = Session["UserName"].ToString(), ArticleId = articleId};
                 return View(comment);
             }
             catch (Exception ex)

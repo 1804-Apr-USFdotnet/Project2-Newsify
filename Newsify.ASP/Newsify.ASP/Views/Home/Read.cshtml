@@ -13,10 +13,12 @@
     <div class="container text-center">@Model.mainText</div>
 </div>
 
-@if (Session["UserName"] != null)
-{
-    Html.ActionLink("New Comment", "Comment", Model);
-}
+<div class="container">
+    @if (Session["UserName"].ToString() != null && Session["UserName"].ToString() != "")
+    {
+        @Html.ActionLink("New Comment", "Comment", Model.ID);
+    }
+</div>
 
 <div class="container text-center">
     <!-- Show comments here -->
