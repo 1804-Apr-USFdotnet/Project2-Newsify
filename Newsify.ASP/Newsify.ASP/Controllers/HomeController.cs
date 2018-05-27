@@ -152,7 +152,7 @@ namespace Newsify.ASP.Controllers
         {
             try
             {             
-                var comment = new WebComment() { Author = Session["UserName"].ToString().Replace("\"", ""), ArticleId = articleId};
+                var comment = new WebComment() { Author = Session["UserName"].ToString(), ArticleId = articleId};
                 return View(comment);
             }
             catch (Exception ex)
@@ -274,12 +274,12 @@ namespace Newsify.ASP.Controllers
 
                 if (!apiResponse.IsSuccessStatusCode)
                 {
-                    //return View("Error");
+                    return View("Login");
                 }
 
                 PassCookiesToClient(apiResponse);
                 var content = await apiResponse.Content.ReadAsStringAsync();
-                Session["UserName"] = content;
+                Session["UserName"] = content.Replace("\"", ""); // Remove \" from UserName
 
                 return RedirectToAction("Index");
             }

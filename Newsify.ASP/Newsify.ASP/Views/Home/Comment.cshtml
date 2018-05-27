@@ -7,10 +7,10 @@
 <h2>Create Comment</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         <h4>@Model.Author</h4>
@@ -22,12 +22,15 @@
                 @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" onclick="@(Model.CommentedAt = DateTime.Now)"/>
-            </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" onclick="@(Model.CommentedAt = DateTime.Now)" />
         </div>
+        @*<div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Create", "Comment", Model, new { @class = "btn btn-dark", @onclick = "@(Model.CommentedAt = DateTime.Now)", @type = "submit" })
+                @Ajax.ActionLink("Create", "Add", Model, new AjaxOptions { HttpMethod = "POST"}, new { @class = "btn btn-dark", @onclick = "@(Model.CommentedAt = DateTime.Now)", @type = "submit" })
+            </div>*@
     </div>
 }
 
