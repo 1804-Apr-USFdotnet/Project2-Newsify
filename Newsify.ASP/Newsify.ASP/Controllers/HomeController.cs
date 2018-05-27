@@ -18,7 +18,7 @@ namespace Newsify.ASP.Controllers
     {
         private static readonly HttpClient client = new HttpClient(new HttpClientHandler() { UseCookies = false });
         private static readonly Uri serviceUri = new Uri("http://localhost:3272/");
-        private static readonly string cookieName = "ApplicationCookie";
+        private static readonly string cookieName = ".AspNet.ApplicationCookie";
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         Headlines top = new Headlines();
@@ -165,7 +165,7 @@ namespace Newsify.ASP.Controllers
 
         // Add the Comment to the Database
         [HttpPost]
-        public async Task<ActionResult> Comment(WebComment comment)
+        public async Task<ActionResult> Comment(WebComment model)
         {
             try
             {
@@ -174,8 +174,12 @@ namespace Newsify.ASP.Controllers
                     throw new Exception("Enter information isn't valid.");
                 }
 
+                // Let's set the author and CommentedAt properties now
+                model.Author = Session["UserName"].ToString();
+                model.CommentedAt = DateTime.Now;
+
                 HttpRequestMessage requestMessage = CreateRequestToService(HttpMethod.Post, "api/Data/Add");
-                requestMessage.Content = new ObjectContent<WebComment>(comment, new JsonMediaTypeFormatter());
+                requestMessage.Content = new ObjectContent<WebComment>(model, new JsonMediaTypeFormatter());
                 HttpResponseMessage apiResponse;
                 try
                 {
@@ -192,7 +196,7 @@ namespace Newsify.ASP.Controllers
                     return View("Error");
                 }
 
-                return View("Index"); // For now just go back to the main page
+                return RedirectToAction("Index"); // For now just go back to the main page
             }
             catch (Exception ex)
             {
@@ -389,7 +393,7 @@ namespace Newsify.ASP.Controllers
             {
                 foreach (string value in values)
                 {
-                    Response.Headers.Add("Set-Cookie", value);
+                    Request.Headers.Add("Set-Cookie", value);
                 }
                 return true;
             }
