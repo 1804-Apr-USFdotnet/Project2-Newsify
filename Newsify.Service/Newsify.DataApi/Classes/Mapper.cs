@@ -146,7 +146,8 @@ namespace Newsify.DataApi.Classes
                     Title = article.Title,
                     Description = article.Description,
                     Url = article.Url,
-                    UrlToImage = article.UrlToImage
+                    UrlToImage = article.UrlToImage,
+                    ID = article.ID                    
                 };
                 return art;
             }
