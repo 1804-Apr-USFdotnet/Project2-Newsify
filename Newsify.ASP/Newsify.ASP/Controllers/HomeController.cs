@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using HtmlAgilityPack;
 using Newsify.ASP.Classes;
 using Newsify.ASP.Models;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Http.Formatting;
-using System.Net;
-using NLog;
 using Newtonsoft.Json;
+using NLog;
 using NReadability;
-using HtmlAgilityPack;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Newsify.ASP.Controllers
 {
@@ -123,6 +120,7 @@ namespace Newsify.ASP.Controllers
             }
         }
 
+        // GET: Show the contents of the article for reading
         public ActionResult Read(Article article)
         {
             try
@@ -144,6 +142,61 @@ namespace Newsify.ASP.Controllers
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
+                return View("Error");
+            }
+        }
+
+        // Get: Change to New Comment View
+        public ActionResult Comment(Article article)
+        {
+            try
+            {             
+                var comment = new WebComment() { Author = Session["UserName"].ToString(), ArticleId = article.ID};
+                return View(comment);
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                logger.Error(ex.Message);
+                return View("Error");
+            }
+        }
+
+        // Add the Comment to the Database
+        [HttpPost]
+        public async Task<ActionResult> Comment(WebComment comment)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception("Enter information isn't valid.");
+                }
+
+                HttpRequestMessage requestMessage = CreateRequestToService(HttpMethod.Post, "api/Data/Add");
+                requestMessage.Content = new ObjectContent<WebComment>(comment, new JsonMediaTypeFormatter());
+                HttpResponseMessage apiResponse;
+                try
+                {
+                    apiResponse = await client.SendAsync(requestMessage);
+                    if (!apiResponse.IsSuccessStatusCode)
+                    {
+                        throw new Exception("Request failed with following error: " + apiResponse.StatusCode);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log error here
+                    logger.Error(ex.Message);
+                    return View("Error");
+                }
+
+                return View("Index"); // For now just go back to the main page
+            }
+            catch (Exception ex)
+            {
+                // Log error here
                 logger.Error(ex.Message);
                 return View("Error");
             }
