@@ -12,3 +12,14 @@
     <h3 style="text-align:center">@Model.description</h3>
     <div class="container text-center">@Model.mainText</div>
 </div>
+
+<div class="container">
+    @if (Session["UserName"] != null && Session["UserName"].ToString() != "")
+    {
+        @Html.ActionLink("New Comment", "Comment", new { articleId = Model.ID } );
+    }
+</div>
+
+<div class="container text-center">
+    <!-- Show comments here -->
+</div>

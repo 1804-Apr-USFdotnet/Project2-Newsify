@@ -1,0 +1,39 @@
+﻿@model Newsify.ASP.Models.WebComment
+
+@{
+    ViewBag.Title = "Newsify: Comment";
+}
+
+<h2>Create Comment</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <h4>@Model.Author</h4>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Comment" class="btn btn-default" />
+            </div>
+            @*<div class="col-md-offset-2 col-md-10">
+                    @Html.ActionLink("Create", "Comment", Model, new { @class = "btn btn-dark", @onclick = "@(Model.CommentedAt = DateTime.Now)", @type = "submit" })
+                    @Ajax.ActionLink("Create", "Add", Model, new AjaxOptions { HttpMethod = "POST"}, new { @class = "btn btn-dark", @onclick = "@(Model.CommentedAt = DateTime.Now)", @type = "submit" })
+                </div>*@
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

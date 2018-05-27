@@ -10,31 +10,18 @@
             <li class="nav-item active">
               <a class="nav-link" routerLink="/articles">Top Twenty <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
           </ul>
           <div class="dropdown">
           <form class="form-inline my-2 my-lg-0">
-            <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [value]="val" (input)="val = $event.target.value" placeholder="Search">
+            <input  class="form-control mr-sm-2" aria-required="true" type="search" placeholder="Search" aria-label="Search" [value]="val" (input)="val = $event.target.value" placeholder="Search">
             <button class="btn btn-outline-success my-2 my-sm-0 dropdown-toggle" type="submit" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" id="byTitle" href="/articles/title/{{val}}">By Title</a>
-                <a class="dropdown-item" id="bySource" href="/articles/source/{{val}}">By Source</a>
-                <a class="dropdown-item" id="byTopic" href="javascript:void(0)">Topic</a>
-                <a class="dropdown-item" id="byCountry" href="javascript:void(0)">Country</a>
-                <a class="dropdown-item" id="byLanguage" href="/articles/lang/{{val}}">Language</a>
+                <a class="dropdown-item" id="byTitle" routerLink="/articles-search/Title/{{val}}">By Title</a>
+                <a class="dropdown-item" id="bySource" routerLink="/articles-search/Source/{{val}}">By Source</a>
+                <a class="dropdown-item" id="byTopic" routerLink="/articles-search/Topic/{{val}}">Topic</a>
+                <a class="dropdown-item" id="byCountry" routerLink="/articles-search/Country/{{val}}">Country</a>
+                <a class="dropdown-item" id="byLanguage" routerLink="/articles-search/Language/{{val}}">Language</a>
+                <a class="dropdown-item" id="byLanguage" routerLink="/articles-search/Date/{{val}}">Date</a>
               </div>
           </form>
           </div>

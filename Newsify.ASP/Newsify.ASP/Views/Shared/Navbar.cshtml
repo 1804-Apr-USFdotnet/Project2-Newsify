@@ -33,7 +33,7 @@
             <li>@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</li>
             @if (Session["UserName"] != null)
             {
-                <li>@Session["UserName"].ToString().Replace("\"", "")</li>
+                <li class="nav-link">@Session["UserName"].ToString().Replace("\"", "")</li>
                 <li>@Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "nav-link" })</li>
             }
             else

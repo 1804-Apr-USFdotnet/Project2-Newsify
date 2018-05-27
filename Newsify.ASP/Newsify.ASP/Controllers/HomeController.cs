@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using HtmlAgilityPack;
 using Newsify.ASP.Classes;
 using Newsify.ASP.Models;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Http.Formatting;
-using System.Net;
-using NLog;
 using Newtonsoft.Json;
+using NLog;
 using NReadability;
-using HtmlAgilityPack;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Newsify.ASP.Controllers
 {
@@ -21,7 +18,7 @@ namespace Newsify.ASP.Controllers
     {
         private static readonly HttpClient client = new HttpClient(new HttpClientHandler() { UseCookies = false });
         private static readonly Uri serviceUri = new Uri("http://localhost:3272/");
-        private static readonly string cookieName = "ApplicationCookie";
+        private static readonly string cookieName = ".AspNet.ApplicationCookie";
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         Headlines top = new Headlines();
@@ -123,6 +120,7 @@ namespace Newsify.ASP.Controllers
             }
         }
 
+        // GET: Show the contents of the article for reading
         public ActionResult Read(Article article)
         {
             try
@@ -144,6 +142,65 @@ namespace Newsify.ASP.Controllers
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
+                return View("Error");
+            }
+        }
+
+        // Get: Change to New Comment View
+        public ActionResult Comment(int articleId)
+        {
+            try
+            {             
+                var comment = new WebComment() { Author = Session["UserName"].ToString(), ArticleId = articleId};
+                return View(comment);
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                logger.Error(ex.Message);
+                return View("Error");
+            }
+        }
+
+        // Add the Comment to the Database
+        [HttpPost]
+        public async Task<ActionResult> Comment(WebComment model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception("Enter information isn't valid.");
+                }
+
+                // Let's set the author and CommentedAt properties now
+                model.Author = Session["UserName"].ToString();
+                model.CommentedAt = DateTime.Now;
+
+                HttpRequestMessage requestMessage = CreateRequestToService(HttpMethod.Post, "api/Data/Add");
+                requestMessage.Content = new ObjectContent<WebComment>(model, new JsonMediaTypeFormatter());
+                HttpResponseMessage apiResponse;
+                try
+                {
+                    apiResponse = await client.SendAsync(requestMessage);
+                    if (!apiResponse.IsSuccessStatusCode)
+                    {
+                        throw new Exception("Request failed with following error: " + apiResponse.StatusCode);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log error here
+                    logger.Error(ex.Message);
+                    return View("Error");
+                }
+
+                return RedirectToAction("Index"); // For now just go back to the main page
+            }
+            catch (Exception ex)
+            {
+                // Log error here
                 logger.Error(ex.Message);
                 return View("Error");
             }
@@ -221,12 +278,12 @@ namespace Newsify.ASP.Controllers
 
                 if (!apiResponse.IsSuccessStatusCode)
                 {
-                    //return View("Error");
+                    return View("Login");
                 }
 
                 PassCookiesToClient(apiResponse);
                 var content = await apiResponse.Content.ReadAsStringAsync();
-                Session["UserName"] = content;
+                Session["UserName"] = content.Replace("\"", ""); // Remove \" from UserName
 
                 return RedirectToAction("Index");
             }
@@ -336,7 +393,7 @@ namespace Newsify.ASP.Controllers
             {
                 foreach (string value in values)
                 {
-                    Response.Headers.Add("Set-Cookie", value);
+                    Request.Headers.Add("Set-Cookie", value);
                 }
                 return true;
             }

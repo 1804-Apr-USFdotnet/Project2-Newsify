@@ -11,5 +11,6 @@ namespace Newsify.DataApi.Models
         public string Description { get; set; }
         public string Url { get; set; }
         public string UrlToImage { get; set; }
+        public int ID { get; set; }
     }
 }
