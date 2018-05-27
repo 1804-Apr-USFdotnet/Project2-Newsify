@@ -1,6 +1,23 @@
 ﻿@{
     var searchString = "";
 }
+
+<script>
+    function StringUpdate(id) {
+        var ipvalue = $("#search").val();
+        var a = $("#"+id).attr("href");
+        a = a.replace("xxx", ipvalue);
+    };
+    function Search(type) {
+        var ipvalue = $("#search").val();
+        //var a = $("#" + type).attr("href");
+        if (ipvalue !== null && ipvalue !== "") {
+            var url = "/Home/Search?SearchString=" + ipvalue + "&Criteria=" + type;
+            window.open(url, "_self");
+        }
+    };
+</script>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     @Html.ActionLink("Newsify", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,18 +42,23 @@
             }
         </ul>
         <form name="SearchForm" class="form-inline my-2 my-lg-0">
-            <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <input id="search" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false" onclick="@(searchString = Html.Name("search").ToString())">
                 Search
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-                @Html.ActionLink("Title", "Search", "Home", new { SearchString = searchString, Criteria = "Title" }, new { @class = "dropdown-item" })
-                @Html.ActionLink("Topic", "Search", "Home", new { SearchString = "Apple", Criteria = "Topic" }, new { @class = "dropdown-item" })
+                <a class="dropdown-item" id="Title" onclick="Search('Title')">Title</a>
+                <a class="dropdown-item" id="Topic" onclick="Search('Topic')">Topic</a>
+                @*@Html.ActionLink("Title", "Search", "Home", new { SearchString = "xxx", Criteria = "Title" }, new { @class = "dropdown-item", @id = "title", @onclick = "StringUpdate('Title')" })
+                @Html.ActionLink("Topic", "Search", "Home", new { SearchString = "xxx", Criteria = "Topic" }, new { @class = "dropdown-item", @id = "Topic", @onclick = "StringUpdate('Topic')" })*@
                 <div role="separator" class="dropdown-divider"></div>
-                @Html.ActionLink("Source", "Search", "Home", new { SearchString = "Hello", Criteria = "Source" }, new { @class = "dropdown-item" })
-                @Html.ActionLink("Country", "Search", "Home", new { SearchString = "Hello", Criteria = "Country" }, new { @class = "dropdown-item" })
-                @Html.ActionLink("Language", "Search", "Home", new { SearchString = "Hello", Criteria = "Language" }, new { @class = "dropdown-item" })
+                <a class="dropdown-item" id="Source" onclick="Search('Source')">Source</a>
+                <a class="dropdown-item" id="Country" onclick="Search('Country')">Country</a>
+                <a class="dropdown-item" id="Language" onclick="Search('Language')">Language</a>
+                @*@Html.ActionLink("Source", "Search", "Home", new { SearchString = "xxx", Criteria = "Source" }, new { @class = "dropdown-item", @id = "Source", @onclick = "StringUpdate('Source')" })
+                @Html.ActionLink("Country", "Search", "Home", new { SearchString = "xxx", Criteria = "Country" }, new { @class = "dropdown-item", @id = "Country", @onclick = "StringUpdate('Country')" })
+                @Html.ActionLink("Language", "Search", "Home", new { SearchString = "xxx", Criteria = "Language" }, new { @class = "dropdown-item", @id = "Language", @onclick = "StringUpdate('Language')" })*@
             </div>
         </form>
     </div>
