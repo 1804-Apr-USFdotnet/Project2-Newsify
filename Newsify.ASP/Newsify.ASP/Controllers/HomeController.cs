@@ -183,7 +183,7 @@ namespace Newsify.ASP.Controllers
 
                     var content = await apiResponse.Content.ReadAsStringAsync();
                     comments = JsonConvert.DeserializeObject<List<WebComment>>(content);
-                    return View(comments);
+                    return PartialView(comments);
                 }
                 catch (Exception ex)
                 {
