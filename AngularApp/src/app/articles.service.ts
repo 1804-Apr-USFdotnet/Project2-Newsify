@@ -20,7 +20,7 @@ export class ArticlesService {
   }
   getArticlesApi(type, input, onSuccess) {
     let dateString = input;
-    var host = "http://localhost:3272/"
+    var host = "http://ec2-18-205-108-130.compute-1.amazonaws.com/Newsify.UsersApi_deploy/"
     if (type === "Title") {
       var url = host + "api/Data/Title";
     } else if (type === "Source") {
