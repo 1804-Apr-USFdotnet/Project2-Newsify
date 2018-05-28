@@ -4,6 +4,67 @@
         <name>Newsify.UsersApi</name>
     </assembly>
     <members>
+        <member name="M:Newsify.UserApi.Controllers.AccountController.get">
+            <summary>
+            This is a basic integration test method to ensure connection to the web api.
+            </summary>
+            <returns>Returns 'hi' as a string in a 200 response.</returns>
+        </member>
+        <member name="M:Newsify.UserApi.Controllers.AccountController.Login(Newsify.UserApi.Models.User)">
+            <summary>
+            This is used by users and admins to log in to the web api for authorization.
+            </summary>
+            <param name="user">This is the input model for the user to log in.</param>
+            <returns>Returns bad request on invalid user model input, or unauthorized for bad user/password combo.
+            Returns 200 OK on success.</returns>
+        </member>
+        <member name="M:Newsify.UserApi.Controllers.AccountController.Logoff">
+            <summary>
+            This function is used to log off of an account.
+            </summary>
+            <returns>Returns 200 OK on a successful logoff.</returns>
+        </member>
+        <member name="M:Newsify.UserApi.Controllers.AccountController.Register(Newsify.UserApi.Models.Account)">
+            <summary>
+            This allows a new standard user to be registered.
+            </summary>
+            <param name="newUser">newUser is of the class Account.</param>
+            <returns>Returns 200 OK on a successful user creation.</returns>
+        </member>
+        <member name="M:Newsify.UserApi.Controllers.AccountController.RegisterAdmin(Newsify.UserApi.Models.Account)">
+            <summary>
+            This allows a new admin to be registered.  Only an existing Admin can register a new admin.
+            </summary>
+            <param name="newAdmin">This is the same as an Account, but it will be registered with Admin permissions.</param>
+            <returns>Returns 200 OK on success.</returns>
+        </member>
+        <member name="M:Newsify.UserApi.Controllers.AccountController.ChangeUserPassword(Newsify.UserApi.Models.ChangePassword)">
+            <summary>
+            This function will change a user's password when called.
+            </summary>
+            <param name="cp">The ChangePassword model requires the old password, the new password, and a confirmation of the new password to validate.</param>
+            <returns>Returns 200 OK on a successful password update.</returns>
+        </member>
+        <member name="M:Newsify.UserApi.Controllers.AccountController.ChangeAdminPassword(Newsify.UserApi.Models.ChangePassword)">
+            <summary>
+            This changes password for admins.
+            </summary>
+            <param name="cp">Requires old, new, and confirmed new password strings.</param>
+            <returns>Returns 200 OK on a successful password change.</returns>
+        </member>
+        <member name="M:Newsify.UserApi.Controllers.AccountController.UpdateProfile(Newsify.UserApi.Models.UpdateUserProfile)">
+            <summary>
+            If profile information needs to change, this will do that.
+            </summary>
+            <param name="profile">First name, last name, and birthdate are updated using this service.</param>
+            <returns>Returns 200 OK on successful information change.</returns>
+        </member>
+        <member name="M:Newsify.UserApi.Controllers.AccountController.updatePassword(Microsoft.AspNet.Identity.EntityFramework.IdentityUser)">
+            <summary>
+            this changes the stored password in the NewsDB database. The password is hashed.
+            </summary>
+            <param name="iUser">This passes the IdentityUser into the database.</param>
+        </member>
         <member name="M:Newsify.UsersApi.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>
             Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"

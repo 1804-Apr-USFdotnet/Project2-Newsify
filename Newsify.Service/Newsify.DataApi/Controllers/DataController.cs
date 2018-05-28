@@ -17,6 +17,11 @@ namespace Newsify.DataApi.Controllers
     {
         private static Logger logger = NLog.LogManager.GetCurrentClassLogger();
         #region Comments
+        /// <summary>
+        /// This will add a comment to the database.
+        /// </summary>
+        /// <param name="comment">A valid Comment object must be passed.</param>
+        /// <returns>Returns 200 OK with a successful</returns>
         [HttpPost]
         [Authorize(Roles = ("admin, user"))]
         [Route("~/api/Data/Add")]
@@ -50,6 +55,11 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
+        /// <summary>
+        /// This action retrieves all of the comments from an article with the associated article ID.
+        /// </summary>
+        /// <param name="articleId">The id of the target article.</param>
+        /// <returns>Returns 200 OK and comments on a successful query.</returns>
         [HttpGet]
         [Route("~/api/Data/Comments")]
         public IHttpActionResult Comments(int articleId)
@@ -74,6 +84,11 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
+        /// <summary>
+        /// This will grab a specific comment via its id.
+        /// </summary>
+        /// <param name="gc">GC will get a comment based on both a comment ID and its ArticleID.</param>
+        /// <returns>It returns 200 OK and the comment on a successful retrieval.</returns>
         [HttpPost]
         [Route("~/api/Data/Comments")]
         public IHttpActionResult Comments(GetComment gc)
@@ -105,6 +120,11 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
+        /// <summary>
+        /// This is used to update a comment. Users can change a comment's content.
+        /// </summary>
+        /// <param name="uc">Model UpdateComment will need the comment's id and article id for verification, and the new comment changes.</param>
+        /// <returns>Returns 200 OK on a success.</returns>
         [HttpPut]
         [Authorize(Roles = ("admin, user"))]
         [Route("~/api/Data/Comments")]
@@ -133,6 +153,11 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
+        /// <summary>
+        /// This will allow any user to delete their own comment.
+        /// </summary>
+        /// <param name="commentId">CommentID must match a valid comment's id.</param>
+        /// <returns>Returns 200 OK on a success.</returns>
         [HttpDelete]
         [Authorize(Roles = ("admin, user"))]
         [Route("~/api/Data/Comments")]
@@ -154,6 +179,11 @@ namespace Newsify.DataApi.Controllers
         #endregion Comments
 
         #region Articles
+        /// <summary>
+        /// This will grab articles by source.
+        /// </summary>
+        /// <param name="source">The source name is passed through this object to match with articles.</param>
+        /// <returns>Returns the articles and 200 OK on a success.</returns>
         [HttpPost]
         [Route("~/api/Data/Source")]
         public IHttpActionResult Articles(ArticleSource source)
@@ -197,6 +227,11 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Grabs articles from a country.
+        /// </summary>
+        /// <param name="country">Uses the country abbreviation (e.g. US) to filter articles.</param>
+        /// <returns>Returns 200 OK and articles by the listed country.</returns>
         [HttpPost]
         [Route("~/api/Data/Country")]
         public IHttpActionResult Articles(ArticleCountry country)
@@ -240,6 +275,11 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Grabs articles by language.
+        /// </summary>
+        /// <param name="language">Language is a 2 character string, e.g. en for english.</param>
+        /// <returns>Returns 200 OK and the requested articles, if any.</returns>
         [HttpPost]
         [Route("~/api/Data/Language")]
         public IHttpActionResult Articles(ArticleLanguage language)
@@ -283,6 +323,11 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Grabs and returns article by the requested topic.
+        /// </summary>
+        /// <param name="topic">Topic is a string to match article topics.</param>
+        /// <returns>Returns 200 OK and the requested articles, if there are any to be found.</returns>
         [HttpPost]
         [Route("~/api/Data/Topic")]
         public IHttpActionResult Articles(ArticleTopic topic)
@@ -318,6 +363,11 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Grabs articles by title.
+        /// </summary>
+        /// <param name="title">The string part of the title that the client is searching for.</param>
+        /// <returns>Returns 200 OK and the articles that match the title parameter.</returns>
         [HttpPost]
         [Route("~/api/Data/Title")]
         public IHttpActionResult Articles(ArticleTitle title)
@@ -353,6 +403,11 @@ namespace Newsify.DataApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Returns articles based on their publish date.
+        /// </summary>
+        /// <param name="pulished">Specifies a date to match with articles.</param>
+        /// <returns>Returns 200 OK and matching articles.</returns>
         [HttpPost]
         [Route("~/api/Data/Date")]
         public IHttpActionResult Articles(ArticlePulished pulished)
