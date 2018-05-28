@@ -67,7 +67,13 @@ namespace Newsify.DataApi.Controllers
             try
             {
                 DataAccess da = new DataAccess();
-                var comments = da.GetComments(articleId);
+                var coms = da.GetComments(articleId);
+
+                var comments = new List<WebComment>();
+                foreach (var c in coms)
+                {
+                    comments.Add(Mapper.MapComment(c, articleId, c.ID));
+                }
 
                 return Ok(comments);
             }

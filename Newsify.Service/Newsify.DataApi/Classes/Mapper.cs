@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newsify.DAL;
 using Newsify.DataApi.Models;
+using Newsify.Logic;
 using NLog;
 
 namespace Newsify.DataApi.Classes
@@ -37,9 +38,12 @@ namespace Newsify.DataApi.Classes
         {
             try
             {
+                var da = new DataAccess();
+                var author = da.GetAuthor(articleId, commentId);
                 var c = new WebComment()
                 {
                     Comment = comment.Comment1,
+                    Author = author,
                     CommentedAt = comment.CommentedAt,
                     ArticleId = articleId,
                     CommentId = commentId

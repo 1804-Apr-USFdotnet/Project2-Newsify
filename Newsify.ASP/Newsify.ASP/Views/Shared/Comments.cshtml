@@ -1,1 +1,16 @@
-﻿@model int
+﻿@model IEnumerable<Newsify.ASP.Models.WebComment>
+
+@foreach (var item in Model)
+{
+    <div class="container text-center">
+        <div class="form-group col-md-offset-2 col-md-10">
+            <div>
+                @item.Author
+            </div>
+            <div>
+                @item.CommentedAt.Date
+            </div>
+        </div>
+        <div>@item.Comment</div>
+    </div>
+}
