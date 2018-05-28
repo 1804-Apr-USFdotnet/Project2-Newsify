@@ -17,7 +17,7 @@ namespace Newsify.ASP.Controllers
     public class HomeController : Controller
     {
         private static readonly HttpClient client = new HttpClient(new HttpClientHandler() { UseCookies = false });
-        private static readonly Uri serviceUri = new Uri("http://localhost:3272/");
+        private static readonly Uri serviceUri = new Uri("http://ec2-18-205-108-130.compute-1.amazonaws.com/Newsify.UsersApi_deploy/");
         private static readonly string cookieName = ".AspNet.ApplicationCookie";
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
