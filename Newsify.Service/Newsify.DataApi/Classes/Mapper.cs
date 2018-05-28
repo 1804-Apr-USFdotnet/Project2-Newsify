@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newsify.DAL;
 using Newsify.DataApi.Models;
+using Newsify.Logic;
 using NLog;
 
 namespace Newsify.DataApi.Classes
@@ -37,9 +38,12 @@ namespace Newsify.DataApi.Classes
         {
             try
             {
+                var da = new DataAccess();
+                var author = da.GetAuthor(articleId, commentId);
                 var c = new WebComment()
                 {
                     Comment = comment.Comment1,
+                    Author = author,
                     CommentedAt = comment.CommentedAt,
                     ArticleId = articleId,
                     CommentId = commentId
@@ -49,7 +53,7 @@ namespace Newsify.DataApi.Classes
             catch (Exception ex)
             {
                 logger.Error(ex, "Attempt to map comment to webcomment failed: " + ex.Message);
-                return null; // return nothing to the caller
+                return null; // return nothing to the caller; Maybe I shouldn't return null?
             }
         }
 

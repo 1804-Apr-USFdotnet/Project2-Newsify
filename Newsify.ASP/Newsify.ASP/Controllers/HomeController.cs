@@ -17,7 +17,7 @@ namespace Newsify.ASP.Controllers
     public class HomeController : Controller
     {
         private static readonly HttpClient client = new HttpClient(new HttpClientHandler() { UseCookies = false });
-        private static readonly Uri serviceUri = new Uri("http://localhost:3272/");
+        private static readonly Uri serviceUri = new Uri("http://ec2-18-205-108-130.compute-1.amazonaws.com/Newsify.UsersApi_deploy/");
         private static readonly string cookieName = ".AspNet.ApplicationCookie";
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -158,6 +158,43 @@ namespace Newsify.ASP.Controllers
             catch (Exception ex)
             {
                 // Log error here
+                logger.Error(ex.Message);
+                return View("Error");
+            }
+        }
+
+        // GET: Get all of the comments for the selected article
+        public async Task<ActionResult> Comments(int articleID)
+        {
+            try
+            {
+                var comments = new List<WebComment>();
+
+                var requestMessage = CreateRequestToService(HttpMethod.Get, "api/Data/Comments?articleID=" + articleID);
+
+                HttpResponseMessage apiResponse;
+                try
+                {
+                    apiResponse = await client.SendAsync(requestMessage);
+                    if (!apiResponse.IsSuccessStatusCode)
+                    {
+                        throw new Exception("Request failed with following error: " + apiResponse.StatusCode);
+                    }
+
+                    var content = await apiResponse.Content.ReadAsStringAsync();
+                    comments = JsonConvert.DeserializeObject<List<WebComment>>(content);
+                    return PartialView(comments);
+                }
+                catch (Exception ex)
+                {
+                    // Log error here
+                    logger.Error(ex.Message);
+                    return View("Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                // log error here
                 logger.Error(ex.Message);
                 return View("Error");
             }
