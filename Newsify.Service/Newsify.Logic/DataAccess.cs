@@ -72,6 +72,29 @@ namespace Newsify.Logic
             }
         }
 
+        public string GetAuthor(int articleId, int commentID)
+        {
+            try
+            {
+                using (var uow = new UnitOfWork(new NewsDBEntities()))
+                {
+                    var id = uow.PostR.SearchFor(p => p.ArticleID == articleId && p.CommentID == commentID).FirstOrDefault();
+                    var author = uow.UserR.SearchFor(u => u.ID == id.UserID).FirstOrDefault();
+                    if (author == null)
+                    {
+                        throw new Exception("User not found.");
+                    }
+                    return author.UserName;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                logger.Error(ex.Message);
+                return null;
+            }
+        }
+
         public Comment GetComment(int commentId)
         {
             try
