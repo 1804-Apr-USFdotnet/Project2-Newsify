@@ -53,7 +53,7 @@ namespace Newsify.DataApi.Classes
             catch (Exception ex)
             {
                 logger.Error(ex, "Attempt to map comment to webcomment failed: " + ex.Message);
-                return null; // return nothing to the caller
+                return null; // return nothing to the caller; Maybe I shouldn't return null?
             }
         }
 
