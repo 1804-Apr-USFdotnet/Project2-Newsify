@@ -12,7 +12,7 @@
         var ipvalue = $("#search").val();
         //var a = $("#" + type).attr("href");
         if (ipvalue !== null && ipvalue !== "") {
-            var url = "Newsify.ASP_deploy/Home/Search?SearchString=" + ipvalue + "&Criteria=" + type;
+            var url = "Home/Search?SearchString=" + ipvalue + "&Criteria=" + type;
             window.open(url, "_self");
         }
     };
