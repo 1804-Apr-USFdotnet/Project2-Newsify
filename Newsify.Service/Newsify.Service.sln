@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newsify.DataApi", "Newsify.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newsify.UsersApi", "Newsify.UsersApi\Newsify.UsersApi.csproj", "{67F0A5F2-BC66-4600-948F-F353B23ADFCE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{365E177D-F978-4E3C-9A3F-30BDB559CE1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{67F0A5F2-BC66-4600-948F-F353B23ADFCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67F0A5F2-BC66-4600-948F-F353B23ADFCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67F0A5F2-BC66-4600-948F-F353B23ADFCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{365E177D-F978-4E3C-9A3F-30BDB559CE1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{365E177D-F978-4E3C-9A3F-30BDB559CE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{365E177D-F978-4E3C-9A3F-30BDB559CE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{365E177D-F978-4E3C-9A3F-30BDB559CE1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,6 +13,8 @@
         //var a = $("#" + type).attr("href");
         if (ipvalue !== null && ipvalue !== "") {
             var url = "Home/Search?SearchString=" + ipvalue + "&Criteria=" + type;
+            if (window.location.href.indexOf("Home") > -1)
+                url = "Search?SearchString=" + ipvalue + "&Criteria=" + type;
             window.open(url, "_self");
         }
     };
