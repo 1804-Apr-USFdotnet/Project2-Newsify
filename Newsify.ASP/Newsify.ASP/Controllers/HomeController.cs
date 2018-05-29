@@ -169,6 +169,11 @@ namespace Newsify.ASP.Controllers
         {
             try
             {
+                if (articleID <= 0)
+                {
+                    return View("Error");
+                }
+
                 var comments = new List<WebComment>();
 
                 var requestMessage = CreateRequestToService(HttpMethod.Get, "api/Data/Comments?articleID=" + articleID);
@@ -285,7 +290,7 @@ namespace Newsify.ASP.Controllers
             }
             catch (Exception ex)
             {
-                logger.Error(ex.Message);
+                logger.Error(ex, ex.Message);
                 return View("Error");
             }
         }

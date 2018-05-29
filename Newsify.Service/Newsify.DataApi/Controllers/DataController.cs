@@ -442,6 +442,31 @@ namespace Newsify.DataApi.Controllers
                 return BadRequest("Something went wrong while saving comment.");
             }
         }
+
+        /// <summary>
+        /// This allows you to search for an article by its URL, which will return a specific article.
+        /// </summary>
+        /// <param name="url">Search via a specific URL of an article.</param>
+        /// <returns>Returns 200 OK and a specific article.</returns>
+        [HttpPost]
+        [Route("~/api/Data/ArticleURL")]
+        public IHttpActionResult Articles(string url)
+        {
+            try
+            {
+                var da = new DataAccess();
+                var art = da.GetArticleByUrl(url);
+                if (art == null) { return NotFound(); }
+
+                var article = Mapper.MapArticle(art);
+
+                return Ok(article);
+            } catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+                throw ex;
+            }
+        }
         #endregion Articles
     }
 }
