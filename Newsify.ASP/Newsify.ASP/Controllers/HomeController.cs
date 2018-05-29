@@ -104,6 +104,7 @@ namespace Newsify.ASP.Controllers
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex, "Attempt to send logoff message failed: " + ex.Message);
                     return View("Index");
                 }
 
@@ -115,7 +116,7 @@ namespace Newsify.ASP.Controllers
             }
             catch (Exception ex)
             {
-                // Log error here
+                logger.Error(ex, "Logout failed: " + ex.Message);
                 return RedirectToAction("Index");
             }
         }
@@ -168,6 +169,11 @@ namespace Newsify.ASP.Controllers
         {
             try
             {
+                if (articleID <= 0)
+                {
+                    return View("Error");
+                }
+
                 var comments = new List<WebComment>();
 
                 var requestMessage = CreateRequestToService(HttpMethod.Get, "api/Data/Comments?articleID=" + articleID);
@@ -188,14 +194,14 @@ namespace Newsify.ASP.Controllers
                 catch (Exception ex)
                 {
                     // Log error here
-                    logger.Error(ex.Message);
+                    logger.Error(ex, ex.Message);
                     return View("Error");
                 }
             }
             catch (Exception ex)
             {
                 // log error here
-                logger.Error(ex.Message);
+                logger.Error(ex, ex.Message);
                 return View("Error");
             }
         }
@@ -284,7 +290,7 @@ namespace Newsify.ASP.Controllers
             }
             catch (Exception ex)
             {
-                logger.Error(ex.Message);
+                logger.Error(ex, ex.Message);
                 return View("Error");
             }
         }

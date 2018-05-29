@@ -406,11 +406,11 @@ namespace Newsify.DataApi.Controllers
         /// <summary>
         /// Returns articles based on their publish date.
         /// </summary>
-        /// <param name="pulished">Specifies a date to match with articles.</param>
+        /// <param name="published">Specifies a date to match with articles.</param>
         /// <returns>Returns 200 OK and matching articles.</returns>
         [HttpPost]
         [Route("~/api/Data/Date")]
-        public IHttpActionResult Articles(ArticlePulished pulished)
+        public IHttpActionResult Articles(ArticlePulished published)
         {
             try
             {
@@ -420,7 +420,7 @@ namespace Newsify.DataApi.Controllers
                 }
 
                 var da = new DataAccess();
-                var arts = da.GetArticles(pulished.PublishedDate);
+                var arts = da.GetArticles(published.PublishedDate);
                 if (arts == null)
                 {
                     return NotFound();
@@ -438,8 +438,33 @@ namespace Newsify.DataApi.Controllers
             }
             catch (Exception ex)
             {
-                logger.Error(ex, "Attempt to get articles from published date " + pulished.PublishedDate + " failed: " + ex.Message);
+                logger.Error(ex, "Attempt to get articles from published date " + published.PublishedDate + " failed: " + ex.Message);
                 return BadRequest("Something went wrong while saving comment.");
+            }
+        }
+
+        /// <summary>
+        /// This allows you to search for an article by its URL, which will return a specific article.
+        /// </summary>
+        /// <param name="url">Search via a specific URL of an article.</param>
+        /// <returns>Returns 200 OK and a specific article.</returns>
+        [HttpPost]
+        [Route("~/api/Data/ArticleURL")]
+        public IHttpActionResult Articles(string url)
+        {
+            try
+            {
+                var da = new DataAccess();
+                var art = da.GetArticleByUrl(url);
+                if (art == null) { return NotFound(); }
+
+                var article = Mapper.MapArticle(art);
+
+                return Ok(article);
+            } catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+                throw ex;
             }
         }
         #endregion Articles

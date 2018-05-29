@@ -270,6 +270,30 @@ namespace Newsify.Logic
                 return null;
             }
         }
+
+        // Search and return an article with the matching url
+        public Article GetArticleByUrl(string url)
+        {
+            try
+            {
+                Article article;
+                using (var uow = new UnitOfWork(new NewsDBEntities()))
+                {
+                    if (uow.ArticleR.SearchFor(x => x.Url == url).Count() == 0)
+                    {
+                        return null;
+                    }
+                    article = uow.ArticleR.SearchFor(x => x.Url == url).FirstOrDefault();
+
+                    return article;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+                throw ex;
+            }
+        }
         #endregion Articles
     }
 }
